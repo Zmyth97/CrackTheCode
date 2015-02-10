@@ -31,7 +31,7 @@ public class MainScreen implements Screen {
 
     public static String PLAY = "play";
     public static String ENDLESS = "endless_mode";
-    public static String OPEN_SCORES = "open_scores";
+    public static String SCORE = "open_scores";
     public static String SHARE = "share";
 
     private OrthographicCamera cam;
@@ -60,4 +60,53 @@ public class MainScreen implements Screen {
         menuRenderer = new MenuRenderer(menuWorld, spriteBatch);
         gameRenderer = new GameRenderer(gameWorld, spriteBatch);
     }
+
+
+    @Override
+    public void render(float delta)
+    {
+
+    }
+
+    @Override
+    public void resize(int width, int height)
+    {
+
+    }
+
+    @Override
+    public void show()
+    {
+
+    }
+
+    @Override
+    public void hide()
+    {
+        if (state == GAME_RUNNING){
+            state = GAME_PAUSED;
+        }
+    }
+
+    @Override
+    public void pause()
+    {
+        if(state == GAME_RUNNING)
+        {
+            state = GAME_PAUSED;
+        }
+    }
+
+    @Override
+    public void resume()
+    {
+
+    }
+
+    @Override
+    public void dispose()
+    {
+
+    }
+
 }

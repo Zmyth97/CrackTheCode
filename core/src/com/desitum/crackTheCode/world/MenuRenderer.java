@@ -27,7 +27,7 @@ public class MenuRenderer {
         menuCamera.update();
         menuBatch.setProjectionMatrix(menuCamera.combined);
 
-        //TODO: KODY, I don't get the cameras enough to do this part!
+
     }
 
     public void resetCam()
