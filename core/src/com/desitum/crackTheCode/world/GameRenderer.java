@@ -25,7 +25,9 @@ public class GameRenderer {
 
     public void render()
     {
-
+        gameCam.position.set(MainScreen.SCREEN_WIDTH/2, MainScreen.SCREEN_HEIGHT/2, 0);
+        gameCam.update();
+        gameBatch.setProjectionMatrix(gameCam.combined);
     }
 
     public OrthographicCamera getCam()

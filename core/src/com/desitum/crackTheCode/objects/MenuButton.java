@@ -14,8 +14,9 @@ public class MenuButton extends Sprite {
     public static float SIZE_Y = 1.5f;
     private float time = 0;
 
-    public MenuButton(String command, float locationX, float locationY, Color color)
+    public MenuButton(String command, float locationX, float locationY, Texture texture)
     {
+        super(texture, 0, 0, texture.getWidth(), texture.getHeight());
         this.command = command;
         this.setPosition(locationX, locationY);
         this.setSize(SIZE_X, SIZE_Y);

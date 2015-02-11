@@ -7,6 +7,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.desitum.crackTheCode.data.Assets;
 import com.desitum.crackTheCode.screens.MainScreen;
 
 public class CrackTheCode extends Game {
@@ -16,7 +17,8 @@ public class CrackTheCode extends Game {
 	
 	@Override
 	public void create () {
-		Screen mainScreen = new MainScreen();
+        Assets.loadMenuTextures();
+        Screen mainScreen = new MainScreen();
         this.setScreen(mainScreen);
 	}
 

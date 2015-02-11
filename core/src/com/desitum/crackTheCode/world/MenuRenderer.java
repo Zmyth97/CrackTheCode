@@ -2,6 +2,8 @@ package com.desitum.crackTheCode.world;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.desitum.crackTheCode.data.Assets;
+import com.desitum.crackTheCode.objects.MenuButton;
 import com.desitum.crackTheCode.screens.MainScreen;
 
 /**
@@ -27,7 +29,9 @@ public class MenuRenderer {
         menuCamera.update();
         menuBatch.setProjectionMatrix(menuCamera.combined);
 
-
+        for (MenuButton menuItem : this.world.getMenuButtons()) {
+            menuItem.draw(menuBatch);
+        }
     }
 
     public void resetCam()
