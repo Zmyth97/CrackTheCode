@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 /**
- * Created by Zmyth97 on 2/9/2015. Cmment
+ * Created by Zmyth97 on 2/9/2015.
  */
 public class MenuButton extends Sprite {
 
