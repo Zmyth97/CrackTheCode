@@ -6,11 +6,10 @@ import com.badlogic.gdx.math.Vector3;
 /**
  * Created by Zmyth97 on 2/9/2015.
  */
-public class CollisionDetection {
+    public class CollisionDetection {
 
-    public static boolean pointInRectangle(Rectangle rect, Vector3 point)
-    {
-        float rw, rh, ry, rx, px, py;
+    public static boolean pointInRectangle(Rectangle rect, Vector3 point){
+        float rw, rh, rx, ry, px, py;
         rw = rect.getWidth();
         rh = rect.getHeight();
         rx = rect.getX();

@@ -3,6 +3,7 @@ package com.desitum.crackTheCode.world;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.renderers.OrthoCachedTiledMapRenderer;
+import com.desitum.crackTheCode.objects.Tile;
 import com.desitum.crackTheCode.screens.MainScreen;
 
 /**
@@ -28,6 +29,11 @@ public class GameRenderer {
         gameCam.position.set(MainScreen.SCREEN_WIDTH/2, MainScreen.SCREEN_HEIGHT/2, 0);
         gameCam.update();
         gameBatch.setProjectionMatrix(gameCam.combined);
+
+        for(Tile t: world.tile)
+        {
+            t.draw(gameBatch);
+        }
     }
 
     public OrthographicCamera getCam()

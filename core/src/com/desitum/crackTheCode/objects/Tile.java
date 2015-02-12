@@ -9,18 +9,16 @@ import com.badlogic.gdx.graphics.Texture;
 public class Tile extends Sprite {
         private float size;
         private float scaleAmount;
-        private Color tileColor;
 
         private boolean active;
 
-    public Tile(float size, float scaleAmount, Color tileColor, boolean active, Texture texture)
+    public Tile(float size, float scaleAmount, boolean active, Texture texture)
     {
         super(texture, 0, 0, texture.getWidth(), texture.getHeight());
 
         this.size = size;
         this.scaleAmount = scaleAmount;
         this.active = active;
-        this.tileColor = tileColor;
 
     }
 
