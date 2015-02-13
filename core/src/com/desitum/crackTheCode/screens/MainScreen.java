@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
+import com.desitum.crackTheCode.GooglePlayServicesInterface;
 import com.desitum.crackTheCode.data.Assets;
 import com.desitum.crackTheCode.data.Settings;
 import com.desitum.crackTheCode.libraries.CollisionDetection;
@@ -53,9 +54,12 @@ public class MainScreen implements Screen {
 
     private Vector3 touchPoint;
 
+    private GooglePlayServicesInterface gpgs;
 
-    public MainScreen()
+
+    public MainScreen(GooglePlayServicesInterface gps)
     {
+        gpgs = gps;
         cam = new OrthographicCamera(SCREEN_WIDTH * 10, SCREEN_HEIGHT * 10);
         textCam = new OrthographicCamera(100, 150);
         cam.position.set(SCREEN_WIDTH * 10 / 2, SCREEN_HEIGHT * 10 / 2, 0);
@@ -72,7 +76,7 @@ public class MainScreen implements Screen {
     @Override
     public void render(float delta) {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        Gdx.gl.glClearColor(1, 0, 1, 1);
+        Gdx.gl.glClearColor(1, 1, 1, 1);
 
 
         if (Gdx.input.justTouched()) {
