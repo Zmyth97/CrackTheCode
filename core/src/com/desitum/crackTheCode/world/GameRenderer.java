@@ -30,10 +30,10 @@ public class GameRenderer {
         gameCam.update();
         gameBatch.setProjectionMatrix(gameCam.combined);
 
-        for(Tile t: world.tile)
-        {
-            t.draw(gameBatch);
-        }
+        //for(Tile t: world.tile)
+        //{
+        //    t.draw(gameBatch);
+        //}
     }
 
     public OrthographicCamera getCam()

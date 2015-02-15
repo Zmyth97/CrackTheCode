@@ -31,6 +31,6 @@ public class Assets {
 
     public static void loadGameTextures()
     {
-       //Color for buttons goes here! :D
+        buttonTexture = new Texture(Gdx.files.internal("game/button.png"));
     }
 }
