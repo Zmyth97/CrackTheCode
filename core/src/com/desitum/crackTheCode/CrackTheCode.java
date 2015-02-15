@@ -19,6 +19,7 @@ public class CrackTheCode extends Game {
     @Override
     public void create() {
         Assets.loadMenuTextures();
+        Assets.loadGameTextures();
         Screen mainScreen = new MainScreen(googlePlay);
         this.setScreen(mainScreen);
     }
