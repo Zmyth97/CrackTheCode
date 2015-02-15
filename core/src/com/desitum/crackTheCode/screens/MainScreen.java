@@ -57,8 +57,7 @@ public class MainScreen implements Screen {
     private GooglePlayServicesInterface gpgs;
 
 
-    public MainScreen(GooglePlayServicesInterface gps)
-    {
+    public MainScreen(GooglePlayServicesInterface gps) {
         gpgs = gps;
         cam = new OrthographicCamera(SCREEN_WIDTH * 10, SCREEN_HEIGHT * 10);
         textCam = new OrthographicCamera(100, 150);
@@ -82,7 +81,7 @@ public class MainScreen implements Screen {
         if (Gdx.input.justTouched()) {
             if (state == MENU_WAITING || state == MENU_TRANSITION) {
                 touchPoint = menuRenderer.getCam().unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
-            } else if (state == GAME_BEFORE || state == GAME_RUNNING || state == GAME_PAUSED || state == GAME_OVER){
+            } else if (state == GAME_BEFORE || state == GAME_RUNNING || state == GAME_PAUSED || state == GAME_OVER) {
                 touchPoint = gameRenderer.getCam().unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
             }
             onClick();
@@ -212,9 +211,11 @@ public class MainScreen implements Screen {
                 break;
         }
     }
-    private void drawMenuBeforeTransition(){
+
+    private void drawMenuBeforeTransition() {
         menuRenderer.render();
     }
+
     private void drawGamePaused() {
         gameRenderer.render();
     }
@@ -243,51 +244,45 @@ public class MainScreen implements Screen {
 
     }
 
-    private void resetGame(){
+    private void resetGame() {
         cam.position.set(SCREEN_WIDTH * 10 / 2, SCREEN_HEIGHT * 10 / 2, 0);
         gameWorld.reset();
         gameRenderer.resetCam();
         menuRenderer.resetCam();
     }
+
     @Override
-    public void resize(int width, int height)
-    {
+    public void resize(int width, int height) {
 
     }
 
 
     @Override
-    public void show()
-    {
+    public void show() {
 
     }
 
     @Override
-    public void hide()
-    {
-        if (state == GAME_RUNNING){
+    public void hide() {
+        if (state == GAME_RUNNING) {
             state = GAME_PAUSED;
         }
     }
 
     @Override
-    public void pause()
-    {
-        if(state == GAME_RUNNING)
-        {
+    public void pause() {
+        if (state == GAME_RUNNING) {
             state = GAME_PAUSED;
         }
     }
 
     @Override
-    public void resume()
-    {
+    public void resume() {
 
     }
 
     @Override
-    public void dispose()
-    {
+    public void dispose() {
 
     }
 

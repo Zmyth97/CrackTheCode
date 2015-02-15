@@ -2,7 +2,6 @@ package com.desitum.crackTheCode.data;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.desitum.crackTheCode.libraries.Drawing;
 
 /**
  * Created by Zmyth97 on 2/9/2015.
@@ -19,8 +18,7 @@ public class Assets {
     public static Texture buttonTexture;
     public static Texture activeButtonTexture;
 
-    public static void loadMenuTextures()
-    {
+    public static void loadMenuTextures() {
         playButtonTexture = new Texture(Gdx.files.internal("menu/playButton.png"));
         endlessButtonTexture = new Texture(Gdx.files.internal("menu/endlessButton.png"));
         scoreButtonTexture = new Texture(Gdx.files.internal("menu/scoreButton.png"));
@@ -29,8 +27,7 @@ public class Assets {
         menuTitleTexture = new Texture(Gdx.files.internal("menu/menuTitle.png"));
     }
 
-    public static void loadGameTextures()
-    {
-       //Color for buttons goes here! :D
+    public static void loadGameTextures() {
+        //Color for buttons goes here! :D
     }
 }

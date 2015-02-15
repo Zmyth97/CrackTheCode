@@ -14,12 +14,9 @@ public class Tile extends Sprite {
     public Tile(float size, float x, float y, Texture texture) {
         super(texture, 0, 0, texture.getWidth(), texture.getHeight());
 
-        setX(x);
-        setY(y);
         this.setSize(size, size);
         this.scaleAmount = 1;
         this.active = false;
-
     }
 
     public void update(float delta) {

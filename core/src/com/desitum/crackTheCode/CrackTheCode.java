@@ -8,29 +8,28 @@ import com.desitum.crackTheCode.data.Assets;
 import com.desitum.crackTheCode.screens.MainScreen;
 
 public class CrackTheCode extends Game {
-	SpriteBatch batch;
-	Texture img;
+    SpriteBatch batch;
+    Texture img;
     GooglePlayServicesInterface googlePlay;
 
-    public CrackTheCode(GooglePlayServicesInterface googlePlay){
+    public CrackTheCode(GooglePlayServicesInterface googlePlay) {
         this.googlePlay = googlePlay;
     }
-	
-	@Override
-	public void create () {
+
+    @Override
+    public void create() {
         Assets.loadMenuTextures();
         Screen mainScreen = new MainScreen(googlePlay);
         this.setScreen(mainScreen);
-	}
-
-	@Override
-	public void render () {
-        super.render();
-	}
+    }
 
     @Override
-    public void dispose()
-    {
+    public void render() {
+        super.render();
+    }
+
+    @Override
+    public void dispose() {
         super.dispose();
 
         getScreen().dispose();

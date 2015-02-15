@@ -15,17 +15,15 @@ public class MenuRenderer {
     private OrthographicCamera menuCamera;
     private MenuWorld world;
 
-    public MenuRenderer(MenuWorld world, SpriteBatch batch)
-    {
+    public MenuRenderer(MenuWorld world, SpriteBatch batch) {
         this.world = world;
         this.menuBatch = batch;
 
         menuCamera = new OrthographicCamera(MainScreen.SCREEN_WIDTH, MainScreen.SCREEN_HEIGHT);
-        menuCamera.position.set(MainScreen.SCREEN_WIDTH/2, MainScreen.SCREEN_HEIGHT/2, 0);
+        menuCamera.position.set(MainScreen.SCREEN_WIDTH / 2, MainScreen.SCREEN_HEIGHT / 2, 0);
     }
 
-    public void render()
-    {
+    public void render() {
         menuCamera.update();
         menuBatch.setProjectionMatrix(menuCamera.combined);
 
@@ -34,13 +32,11 @@ public class MenuRenderer {
         }
     }
 
-    public void resetCam()
-    {
-        menuCamera.position.set(MainScreen.SCREEN_WIDTH/2, MainScreen.SCREEN_HEIGHT/2, 0);
+    public void resetCam() {
+        menuCamera.position.set(MainScreen.SCREEN_WIDTH / 2, MainScreen.SCREEN_HEIGHT / 2, 0);
     }
 
-    public OrthographicCamera getCam()
-    {
+    public OrthographicCamera getCam() {
         return menuCamera;
     }
 }

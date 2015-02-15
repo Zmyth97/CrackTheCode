@@ -7,7 +7,10 @@ package com.desitum.crackTheCode;
 public interface GooglePlayServicesInterface {
 
     public void getLeaderBoard();
+
     public void submitScore();
+
     public void login();
+
     public void logout();
 }

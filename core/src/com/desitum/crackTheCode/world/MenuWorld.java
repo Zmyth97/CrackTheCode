@@ -13,8 +13,7 @@ import java.util.ArrayList;
 public class MenuWorld {
     private ArrayList<MenuButton> menuButtons;
 
-    public MenuWorld()
-    {
+    public MenuWorld() {
         menuButtons = new ArrayList<MenuButton>();
         createButtons();
     }
@@ -22,8 +21,7 @@ public class MenuWorld {
     /**
      * Kody said I need documentation, but I figure "create buttons" is pretty obvious in what it does....
      */
-    private void createButtons()
-    {
+    private void createButtons() {
         //Create the buttons!
         MenuButton playButton = new MenuButton(MainScreen.PLAY, 1, 8, Assets.playButtonTexture);
         MenuButton endlessButton = new MenuButton(MainScreen.ENDLESS, 1, 6, Assets.endlessButtonTexture);
@@ -37,7 +35,7 @@ public class MenuWorld {
         menuButtons.add(soundButton);
     }
 
-    public ArrayList<MenuButton> getMenuButtons(){
+    public ArrayList<MenuButton> getMenuButtons() {
         return this.menuButtons;
     }
 }
