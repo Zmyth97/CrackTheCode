@@ -5,4 +5,5 @@ package com.desitum.crackTheCode.libraries;
  * can be used by kody and people in []
  */
 public class Interpolator {
+    public static final int DECREASE_INTERPOLATOR = 0;
 }
