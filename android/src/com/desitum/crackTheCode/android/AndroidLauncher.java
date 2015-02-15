@@ -16,7 +16,7 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
         config.useAccelerometer = false;
         config.useCompass = false;
         config.useWakelock = false;
-		initialize(new CrackTheCode(), config);
+		initialize(new CrackTheCode(this), config);
 	}
 
     @Override

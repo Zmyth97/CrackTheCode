@@ -1,10 +1,7 @@
 package com.desitum.crackTheCode;
 
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.desitum.crackTheCode.data.Assets;
@@ -14,11 +11,15 @@ public class CrackTheCode extends Game {
 	SpriteBatch batch;
 	Texture img;
     GooglePlayServicesInterface googlePlay;
+
+    public CrackTheCode(GooglePlayServicesInterface googlePlay){
+        this.googlePlay = googlePlay;
+    }
 	
 	@Override
 	public void create () {
         Assets.loadMenuTextures();
-        Screen mainScreen = new MainScreen();
+        Screen mainScreen = new MainScreen(googlePlay);
         this.setScreen(mainScreen);
 	}
 
