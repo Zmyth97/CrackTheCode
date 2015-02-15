@@ -23,6 +23,8 @@ public class MenuWorld {
      */
     private void createButtons() {
         //Create the buttons!
+        MenuButton.SIZE_X = 3.5f;
+        MenuButton.SIZE_Y = 3.5f;
         MenuButton playButton = new MenuButton(MainScreen.PLAY, 1, 1, Assets.buttonTexture);
         MenuButton endlessButton = new MenuButton(MainScreen.ENDLESS, 1, 5.5f, Assets.buttonTexture);
         MenuButton scoreButton = new MenuButton(MainScreen.SCORE, 5.5f, 1, Assets.buttonTexture);
