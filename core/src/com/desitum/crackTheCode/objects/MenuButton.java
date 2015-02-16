@@ -1,6 +1,5 @@
 package com.desitum.crackTheCode.objects;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
@@ -11,8 +10,8 @@ public class MenuButton extends Sprite {
 
     private String command;
 
-    public static float SIZE_X = 8;
-    public static float SIZE_Y = 1.5f;
+    public static float SIZE_X = 3.5f;
+    public static float SIZE_Y = 3.5f;
     private float time = 0;
 
     public MenuButton(String command, float locationX, float locationY, Texture texture) {
@@ -20,6 +19,7 @@ public class MenuButton extends Sprite {
         this.command = command;
         this.setPosition(locationX, locationY);
         this.setSize(SIZE_X, SIZE_Y);
+        this.setColor(0, 0, 0.2f, 1);
     }
 
     public void update(float delta) {

@@ -4,9 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.desitum.crackTheCode.GooglePlayServicesInterface;
 import com.desitum.crackTheCode.data.Assets;
 import com.desitum.crackTheCode.data.Settings;
@@ -26,6 +27,8 @@ public class MainScreen implements Screen {
     public static final float SCREEN_HEIGHT = 15;
 
     public static int state = 0;
+
+    private Viewport viewport;
 
     public static final int MENU_BEFORE_TRANSITION = 0;
     public static final int MENU_WAITING = 1;
@@ -62,6 +65,11 @@ public class MainScreen implements Screen {
         cam = new OrthographicCamera(SCREEN_WIDTH * 10, SCREEN_HEIGHT * 10);
         textCam = new OrthographicCamera(100, 150);
         cam.position.set(SCREEN_WIDTH * 10 / 2, SCREEN_HEIGHT * 10 / 2, 0);
+
+        //the viewport object will handle camera's attributes
+        //the aspect provided (worldWidth/worldHeight) will be kept
+        viewport = new FitViewport(SCREEN_WIDTH, SCREEN_HEIGHT, cam);
+
         spriteBatch = new SpriteBatch();
 
         menuWorld = new MenuWorld();
@@ -252,8 +260,11 @@ public class MainScreen implements Screen {
     }
 
     @Override
-    public void resize(int width, int height) {
-
+    public void resize(int width, int height)
+    {
+        //notice that the method receives the entire screen size
+        //the last argument tells the viewport to center the camera in the screen
+        viewport.update(width, height, true);
     }
 
 
