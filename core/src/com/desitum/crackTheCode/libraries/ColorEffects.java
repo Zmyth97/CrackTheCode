@@ -18,9 +18,9 @@ public class ColorEffects
     private float slopeGreen;
     private float slopeBlue;
 
-    private int endRed;
-    private int endGreen;
-    private int endBlue;
+    private float endRed;
+    private float endGreen;
+    private float endBlue;
 
     private float currentRed;
     private float currentGreen;
@@ -57,9 +57,9 @@ public class ColorEffects
         currentGreen = startColor.g;
         currentBlue = startColor.b;
 
-        endRed = (int) endColor.r;
-        endGreen = (int) endColor.g;
-        endBlue = (int) endColor.b;
+        endRed = endColor.r;
+        endGreen = endColor.g;
+        endBlue = endColor.b;
     }
 
     public void start(){

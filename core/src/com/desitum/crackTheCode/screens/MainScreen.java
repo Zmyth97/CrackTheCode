@@ -26,7 +26,7 @@ public class MainScreen implements Screen {
     public static final float SCREEN_WIDTH = 10;
     public static final float SCREEN_HEIGHT = 15;
 
-    public static int state = 0;
+    public static int state = 1;
 
     private Viewport viewport;
 
@@ -96,7 +96,6 @@ public class MainScreen implements Screen {
         }
 
         update(delta);
-        //draw();
 
         cam.update();
         spriteBatch.enableBlending();
@@ -130,8 +129,9 @@ public class MainScreen implements Screen {
     private void onClickMenuWaiting() {
         for (MenuButton mb : menuWorld.getMenuButtons()) {
             if (CollisionDetection.pointInRectangle(mb.getBoundingRectangle(), touchPoint)) { // if touched a rectangle
+                mb.onClick();
                 if (mb.getCommand().equals(PLAY)) { // If the button was play
-                    state = MENU_TRANSITION;
+                    //state = MENU_TRANSITION;
                 } else if (mb.getCommand().equals(SCORE)) { // If the button was high scores
 
                 } else if (mb.getCommand().equals(SOUND)) { // If the button was sound
@@ -168,10 +168,10 @@ public class MainScreen implements Screen {
 
                 break;
             case MENU_WAITING:
-
+                updateMenuWaiting(delta);
                 break;
             case MENU_TRANSITION:
-
+                updateMenuTransition(delta);
                 break;
             case GAME_BEFORE:
 
@@ -189,6 +189,14 @@ public class MainScreen implements Screen {
 
                 break;
         }
+    }
+
+    private void updateMenuTransition(float delta){
+        menuWorld.update(delta);
+    }
+
+    private void updateMenuWaiting(float delta){
+        menuWorld.update(delta);
     }
 
     private void draw() {

@@ -25,7 +25,7 @@ public class MenuButton extends Sprite {
         this.setSize(SIZE_X, SIZE_Y);
         this.setColor(0, 0, 0.2f, 1);
 
-        this.colorChanger = new ColorEffects(this.getColor(), new Color(0.98f, 0.85f, 0.4f, 1), 1);
+        this.colorChanger = new ColorEffects(this.getColor(), new Color(0.98f, 0.85f, 0.4f, 1), 0.5f);
     }
 
     public void update(float delta) {
@@ -37,7 +37,7 @@ public class MenuButton extends Sprite {
         }
     }
 
-    private void onClick(){
+    public void onClick(){
         colorChanger.start();
     }
 
