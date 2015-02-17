@@ -2,6 +2,7 @@ package com.desitum.crackTheCode.world;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.maps.tiled.renderers.OrthoCachedTiledMapRenderer;
 import com.desitum.crackTheCode.objects.Tile;
 import com.desitum.crackTheCode.screens.MainScreen;
 
