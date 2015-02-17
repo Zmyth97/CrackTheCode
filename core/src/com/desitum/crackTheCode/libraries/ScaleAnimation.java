@@ -21,4 +21,16 @@ public class ScaleAnimation implements Animation {
     public void update(float delta) {
 
     }
+
+    public float singleBounceShrinkCalculator(float bounceAmount, float startPoint) {
+        //To Get the Shrink Amount
+        //Shrink Formula: 0.4282 * squareroot(bounceAmount-1.1) + 1.30
+        //Only works on bounce amounts >= 1.1 and <= 2.0 or it gets unaccurate
+
+        float shrinkAmount = (float) (0.4282f * (float) Math.sqrt(bounceAmount - 1.1) + 1.30);
+        return shrinkAmount;
+
+
+
+    }
 }
