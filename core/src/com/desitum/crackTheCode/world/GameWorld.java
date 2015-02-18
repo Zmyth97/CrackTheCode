@@ -6,6 +6,7 @@ import com.desitum.crackTheCode.objects.Tile;
 import com.desitum.crackTheCode.screens.MainScreen;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 /**
@@ -26,6 +27,9 @@ public class GameWorld {
             float locX = (tilesToDraw%4) * 2.4f + 0.4f;
             tiles.add(new Tile(2, locX, locY, Assets.buttonTexture));
         }
+
+        Collections.shuffle(tiles);
+        newActiveTile();
     }
 
     public void setGameMode(){

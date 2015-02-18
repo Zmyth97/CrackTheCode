@@ -61,8 +61,10 @@ public class Tile extends Sprite {
     }
 
     public void update(float delta) {
-
-        colorChanger.update(delta);
+        if (colorChanger != null) {
+            colorChanger.update(delta);
+            setColor(colorChanger.getCurrentColor());
+        }
     }
 
 }

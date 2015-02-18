@@ -38,7 +38,7 @@ public class MenuButton extends Sprite {
 
     }
     public void onClick(){
-        shrinker.start();
+        //shrinker.start();
     }
 
     public String getCommand() {
