@@ -6,7 +6,7 @@ package com.desitum.crackTheCode.libraries;
  */
 public class ScaleAnimation implements Animation {
 
-    private float startScale, endScale, currentScale, duration;
+    private float startScale, endScale, currentScale, duration, pointInInterpolation;
     private int interpolator;
 
     public ScaleAnimation(float startScale, float endScale, float duration, int interpolator) {
@@ -19,7 +19,7 @@ public class ScaleAnimation implements Animation {
     }
 
     public void update(float delta) {
-
+        pointInInterpolation += delta;
     }
 
     public float singleBounceShrinkCalculator(float bounceAmount, float startPoint) {

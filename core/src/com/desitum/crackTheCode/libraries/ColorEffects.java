@@ -74,6 +74,10 @@ public class ColorEffects
             currentGreen = slopeGreen * pointInTransition + startGreen;
             currentBlue = slopeBlue * pointInTransition + startBlue;
 
+            System.out.println("currentRed : " + currentRed);
+            System.out.println("currentb : " + currentBlue);
+            System.out.println("cg : " + currentGreen);
+
             if (pointInTransition >= 1){
                 transforming = false;
 

@@ -34,7 +34,6 @@ public class MenuWorld {
     public void update(float delta){
         for (MenuButton mb: menuButtons){
             mb.update(delta);
-            System.out.println(mb.getCommand());
         }
     }
 
