@@ -68,7 +68,7 @@ public class ColorEffects
 
     public void update(float delta){
         if (transforming){
-            pointInTransition += delta / (duration);
+            pointInTransition += delta / duration;
 
             currentRed = slopeRed * pointInTransition + startRed;
             currentGreen = slopeGreen * pointInTransition + startGreen;
