@@ -49,9 +49,9 @@ public class ColorEffects
         startGreen = startColor.g;
         startBlue = startColor.b;
 
-        slopeRed = (startColor.r - endColor.r) / (0 - duration);
-        slopeGreen = (startColor.g - endColor.g) / (0 - duration);
-        slopeRed = (startColor.g - endColor.g) / (0 - duration);
+        slopeRed = (endColor.r - startColor.r) / (duration -0);
+        slopeGreen = (endColor.g - startColor.g) / (duration - 0);
+        slopeRed = (endColor.g - startColor.g) / (duration - 0);
 
         currentRed = startColor.r;
         currentGreen = startColor.g;
@@ -68,13 +68,13 @@ public class ColorEffects
 
     public void update(float delta){
         if (transforming){
-            pointInTransition += delta / duration;
+            pointInTransition += delta / (duration);
 
             currentRed = slopeRed * pointInTransition + startRed;
             currentGreen = slopeGreen * pointInTransition + startGreen;
             currentBlue = slopeBlue * pointInTransition + startBlue;
 
-            if (pointInTransition >= 1){
+            if (pointInTransition >= duration){
                 transforming = false;
 
                 currentRed = endRed;
