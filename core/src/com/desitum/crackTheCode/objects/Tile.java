@@ -15,6 +15,7 @@ public class Tile extends Sprite {
     private float scaleAmount;
 
     private boolean active;
+    private boolean disabled;
 
     private float tilePositionX;
     private float tilePositionY;
@@ -29,6 +30,7 @@ public class Tile extends Sprite {
         this.setPosition(locationX, locationY);
         this.scaleAmount = 1;
         this.active = false;
+        this.disabled = false;
 
 
     }
@@ -37,8 +39,12 @@ public class Tile extends Sprite {
         return active;
     }
 
+    public boolean isDisabled(){
+        return disabled;
+    }
     public void fadeBack(){
         active = false;
+        disabled = true;
 
         if(MainScreen.GAME_MODE == MainScreen.REGULAR_MODE) {
             colorChanger = new ColorEffects(Colors.ACTIVE_CIRCLE, Colors.DISABLED_CIRCLE, 0.5f);
