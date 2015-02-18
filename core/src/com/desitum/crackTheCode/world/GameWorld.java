@@ -6,6 +6,7 @@ import com.desitum.crackTheCode.objects.Tile;
 import com.desitum.crackTheCode.screens.MainScreen;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Created by Zmyth97 on 2/9/2015.
@@ -47,7 +48,16 @@ public class GameWorld {
     }
 
     public void newActiveTile(){
-
+        if (MainScreen.GAME_MODE == MainScreen.ENDLESS_MODE){
+            Random r = new Random();
+            tiles.get(r.nextInt(tiles.size())).makeActive();
+        } else {
+            for (Tile t: tiles){
+                if (!t.isDisabled()){
+                    t.makeActive();
+                }
+            }
+        }
     }
 
     public void reset() {
