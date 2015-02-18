@@ -25,7 +25,7 @@ public class Tile extends Sprite {
     public Tile(float size, float locationX, float locationY,  Texture texture) {
         super(texture, 0, 0, texture.getWidth(), texture.getHeight());
 
-        this.setColor(0, 0, 0.2f, 1);
+        this.setColor(Colors.GAME_CIRCLE);
         this.setSize(size, size);
         this.setPosition(locationX, locationY);
         this.scaleAmount = 1;
@@ -43,20 +43,24 @@ public class Tile extends Sprite {
         return disabled;
     }
     public void fadeBack(){
+        System.out.println("active: " + active + ", disabled: " + disabled);
         active = false;
         disabled = true;
 
         if(MainScreen.GAME_MODE == MainScreen.REGULAR_MODE) {
             colorChanger = new ColorEffects(Colors.ACTIVE_CIRCLE, Colors.DISABLED_CIRCLE, 0.5f);
+            colorChanger.start();
         }
         else {
             colorChanger = new ColorEffects(Colors.ACTIVE_CIRCLE, Colors.GAME_CIRCLE, 0.5f);
+            colorChanger.start();
         }
     }
 
     public void makeActive(){
         active = true;
         colorChanger = new ColorEffects(Colors.GAME_CIRCLE, Colors.ACTIVE_CIRCLE, 0.5f);
+        colorChanger.start();
 
     }
 

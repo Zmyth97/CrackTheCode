@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.desitum.crackTheCode.libraries.ColorEffects;
+import com.desitum.crackTheCode.libraries.Colors;
 import com.desitum.crackTheCode.libraries.ScaleAnimation;
 
 /**
@@ -24,7 +25,7 @@ public class MenuButton extends Sprite {
         this.command = command;
         this.setPosition(locationX, locationY);
         this.setSize(SIZE_X, SIZE_Y);
-        this.setColor(0, 0, 0.2f, 1);
+        this.setColor(Colors.GAME_CIRCLE);
     }
 
     public void update(float delta) {

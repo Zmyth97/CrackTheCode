@@ -59,6 +59,7 @@ public class GameWorld {
             for (Tile t: tiles){
                 if (!t.isDisabled()){
                     t.makeActive();
+                    break;
                 }
             }
         }

@@ -19,6 +19,9 @@ import com.desitum.crackTheCode.world.GameWorld;
 import com.desitum.crackTheCode.world.MenuRenderer;
 import com.desitum.crackTheCode.world.MenuWorld;
 
+import sun.rmi.runtime.Log;
+import sun.security.ssl.Debug;
+
 /**
  * Created by Zmyth97 on 2/9/2015.
  */
@@ -163,6 +166,7 @@ public class MainScreen implements Screen {
     }
 
     private void onClickGameRunning() {
+        System.out.println("clicked:");
         for (Tile t: gameWorld.getTiles()){
             if (CollisionDetection.pointInRectangle(t.getBoundingRectangle(), touchPoint)){
                 if (t.isActive()){
