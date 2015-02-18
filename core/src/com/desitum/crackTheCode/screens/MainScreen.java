@@ -28,6 +28,7 @@ public class MainScreen implements Screen {
     public static final float SCREEN_HEIGHT = 15;
 
     public static int state = 1;
+    public int score;
 
     private Viewport viewport;
 
@@ -66,6 +67,8 @@ public class MainScreen implements Screen {
 
 
     public MainScreen(GooglePlayServicesInterface gps) {
+        score = 0;
+
         gpgs = gps;
         cam = new OrthographicCamera(SCREEN_WIDTH * 10, SCREEN_HEIGHT * 10);
         textCam = new OrthographicCamera(100, 150);

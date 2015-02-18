@@ -42,7 +42,9 @@ public class GameWorld {
         return tiles;
     }
 
+    public void newActiveTile(){
 
+    }
 
     public void reset() {
         //Placeholder for MainScreen
