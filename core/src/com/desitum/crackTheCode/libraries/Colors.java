@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class Colors {
     public static final Color ACTIVE_CIRCLE = new Color(0.99f, 0.45f, 0.07f, 1);
     public static final Color GAME_CIRCLE = new Color(0.13f, 0.17f, 0.96f, 1);
+    public static final Color DISABLED_CIRCLE = new Color(0.5f, 0.5f, 0.5f, 1);
 
 
     public static ArrayList<Color> Colors;
@@ -20,6 +21,7 @@ public class Colors {
 
         Colors.add(ACTIVE_CIRCLE);
         Colors.add(GAME_CIRCLE);
+        Colors.add(DISABLED_CIRCLE);
     }
 
 }

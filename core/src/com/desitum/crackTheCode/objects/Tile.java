@@ -4,6 +4,9 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.desitum.crackTheCode.data.Assets;
+import com.desitum.crackTheCode.libraries.ColorEffects;
+import com.desitum.crackTheCode.libraries.Colors;
+import com.desitum.crackTheCode.screens.MainScreen;
 
 /**
  * Created by Zmyth97 on 2/11/2015.
@@ -16,6 +19,7 @@ public class Tile extends Sprite {
     private float tilePositionX;
     private float tilePositionY;
 
+    private ColorEffects colorChanger;
 
     public Tile(float size, float locationX, float locationY,  Texture texture) {
         super(texture, 0, 0, texture.getWidth(), texture.getHeight());
@@ -27,6 +31,21 @@ public class Tile extends Sprite {
         this.active = false;
 
 
+    }
+
+    public boolean isActive(){
+        return active;
+    }
+
+    public void fadeBack(){
+        active = false;
+
+        if(MainScreen.GAME_MODE == REGULAR_MODE) {
+            colorChanger = new ColorEffects(Colors.ACTIVE_CIRCLE, Colors.DISABLED_CIRCLE, 0.5f);
+        }
+        else {
+
+        }
     }
 
     public void update(float delta) {
