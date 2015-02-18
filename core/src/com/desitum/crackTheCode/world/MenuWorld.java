@@ -17,13 +17,8 @@ public class MenuWorld {
         createButtons();
     }
 
-    /**
-     * Kody said I need documentation, but I figure "create buttons" is pretty obvious in what it does....
-     */
     private void createButtons() {
         //Create the buttons!
-        //ZACK YOU ARE AN IDIOT SET THESE IN THE CLASS!!!!!!!!!!!!!! MenuButton.SIZE_X = 3.5f;
-        //ZACK YOU ARE AN IDIOT SET THESE IN THE CLASS!!!!!!!!!!!!!! MenuButton.SIZE_Y = 3.5f;
         MenuButton playButton = new MenuButton(MainScreen.PLAY, 1, 1, Assets.buttonTexture);
         MenuButton endlessButton = new MenuButton(MainScreen.ENDLESS, 1, 5.5f, Assets.buttonTexture);
         MenuButton scoreButton = new MenuButton(MainScreen.SCORE, 5.5f, 1, Assets.buttonTexture);

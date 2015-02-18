@@ -131,15 +131,15 @@ public class MainScreen implements Screen {
             if (CollisionDetection.pointInRectangle(mb.getBoundingRectangle(), touchPoint)) { // if touched a rectangle
                 mb.onClick();
                 if (mb.getCommand().equals(PLAY)) { // If the button was play
-                    //state = MENU_TRANSITION;
+                    state = GAME_RUNNING;
                 } else if (mb.getCommand().equals(SCORE)) { // If the button was high scores
 
                 } else if (mb.getCommand().equals(SOUND)) { // If the button was sound
                     Settings.volumeOn = !Settings.volumeOn; // toggle whether the volume is on
                     if (Settings.volumeOn) { // update the texture for the Sound Button
-                        mb.setTexture(Assets.soundButtonOnTexture);
+                        mb.setTexture(Assets.buttonTexture); //No sound on texture yet!
                     } else {
-                        mb.setTexture(Assets.soundButtonOffTexture);
+                        mb.setTexture(Assets.buttonTexture); //No sound off texture yet!
                     }
                 }
             }
@@ -165,7 +165,7 @@ public class MainScreen implements Screen {
     private void update(float delta) {
         switch (state) {
             case MENU_BEFORE_TRANSITION:
-
+                updateMenuBeforeTransition(delta);
                 break;
             case MENU_WAITING:
                 updateMenuWaiting(delta);
@@ -174,21 +174,25 @@ public class MainScreen implements Screen {
                 updateMenuTransition(delta);
                 break;
             case GAME_BEFORE:
-
+                updateGameBefore(delta);
                 break;
             case GAME_PAUSED:
-
+                updateGamePaused(delta);
                 break;
             case GAME_RUNNING:
-
+                updateGameRunning(delta);
                 break;
             case GAME_OVER:
-
+                updateGameOver(delta);
                 break;
             case GAME_OVER_WITH_TRANSITION:
-
+                updateGameOverTransition(delta);
                 break;
         }
+    }
+
+    private void updateMenuBeforeTransition(float delta){
+        menuWorld.update(delta);
     }
 
     private void updateMenuTransition(float delta){
@@ -197,6 +201,26 @@ public class MainScreen implements Screen {
 
     private void updateMenuWaiting(float delta){
         menuWorld.update(delta);
+    }
+
+    private void updateGameBefore(float delta){
+        gameWorld.update(state, gameRenderer.getCam(), delta);
+    }
+
+    private void updateGameRunning(float delta) {
+        gameWorld.update(state, gameRenderer.getCam(), delta);
+    }
+
+    private void updateGamePaused(float delta) {
+
+    }
+
+    private void updateGameOver(float delta) {
+        gameWorld.update(state, gameRenderer.getCam(), delta);
+    }
+
+    private void updateGameOverTransition(float delta){
+
     }
 
     private void draw() {
