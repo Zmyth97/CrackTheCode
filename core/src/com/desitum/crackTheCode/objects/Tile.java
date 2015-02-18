@@ -40,7 +40,7 @@ public class Tile extends Sprite {
     public void fadeBack(){
         active = false;
 
-        if(MainScreen.GAME_MODE == REGULAR_MODE) {
+        if(MainScreen.GAME_MODE == MainScreen.REGULAR_MODE) {
             colorChanger = new ColorEffects(Colors.ACTIVE_CIRCLE, Colors.DISABLED_CIRCLE, 0.5f);
         }
         else {
