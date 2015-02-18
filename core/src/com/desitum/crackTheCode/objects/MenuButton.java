@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.desitum.crackTheCode.libraries.ColorEffects;
+import com.desitum.crackTheCode.libraries.ScaleAnimation;
 
 /**
  * Created by Zmyth97 on 2/9/2015.
@@ -12,7 +13,7 @@ public class MenuButton extends Sprite {
 
     private String command;
 
-    private ColorEffects colorChanger;
+    private ScaleAnimation shrinker;
 
     public static float SIZE_X = 3.5f;
     public static float SIZE_Y = 3.5f;
@@ -24,21 +25,20 @@ public class MenuButton extends Sprite {
         this.setPosition(locationX, locationY);
         this.setSize(SIZE_X, SIZE_Y);
         this.setColor(0, 0, 0.2f, 1);
-
-        this.colorChanger = new ColorEffects( new Color(0.98f, 0.85f, 0.4f, 1),this.getColor(), 0.5f);
     }
 
     public void update(float delta) {
-        colorChanger.update(delta);
-        this.setColor(colorChanger.getCurrentColor());
         time += delta;
         if (time > 1) {
             time = 1;
         }
     }
 
+    public void scaleOverShoot(){
+
+    }
     public void onClick(){
-        colorChanger.start();
+        shrinker.start();
     }
 
     public String getCommand() {

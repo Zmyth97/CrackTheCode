@@ -27,6 +27,10 @@ public class GameWorld {
         }
     }
 
+    public void setGameMode(){
+
+    }
+
     public void update(int state, OrthographicCamera cam, float delta) {
         if (state == MainScreen.GAME_RUNNING) {
 
@@ -37,6 +41,8 @@ public class GameWorld {
     public ArrayList<Tile> getTiles(){
         return tiles;
     }
+
+
 
     public void reset() {
         //Placeholder for MainScreen

@@ -13,6 +13,7 @@ import com.desitum.crackTheCode.data.Assets;
 import com.desitum.crackTheCode.data.Settings;
 import com.desitum.crackTheCode.libraries.CollisionDetection;
 import com.desitum.crackTheCode.objects.MenuButton;
+import com.desitum.crackTheCode.objects.Tile;
 import com.desitum.crackTheCode.world.GameRenderer;
 import com.desitum.crackTheCode.world.GameWorld;
 import com.desitum.crackTheCode.world.MenuRenderer;
@@ -38,6 +39,10 @@ public class MainScreen implements Screen {
     public static final int GAME_PAUSED = 5;
     public static final int GAME_OVER = 6;
     public static final int GAME_OVER_WITH_TRANSITION = 7;
+
+    public static int GAME_MODE = 0;
+    public static final int ENDLESS_MODE = 0;
+    public static final int REGULAR_MODE = 1;
 
     public static String PLAY = "play";
     public static String ENDLESS = "endless_mode";
@@ -155,7 +160,15 @@ public class MainScreen implements Screen {
     }
 
     private void onClickGameRunning() {
-        //TODO Add in Active Tiles
+        for (Tile t: gameWorld.getTiles()){
+            if (CollisionDetection.pointInRectangle(t.getBoundingRectangle(), touchPoint)){
+                if (t.isActive()){
+                    score += 1;
+                    t.fadeBack();
+                    gameWorld.newActiveTile();
+                }
+            }
+        }
     }
 
     private void onClickGameOver() {
