@@ -36,6 +36,10 @@ public class GameWorld {
 
         }
 
+        for(Tile t: tiles){
+            t.update(delta);
+        }
+
     }
 
     public ArrayList<Tile> getTiles(){

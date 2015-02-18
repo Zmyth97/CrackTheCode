@@ -44,12 +44,19 @@ public class Tile extends Sprite {
             colorChanger = new ColorEffects(Colors.ACTIVE_CIRCLE, Colors.DISABLED_CIRCLE, 0.5f);
         }
         else {
-
+            colorChanger = new ColorEffects(Colors.ACTIVE_CIRCLE, Colors.GAME_CIRCLE, 0.5f);
         }
+    }
+
+    public void makeActive(){
+        active = true;
+        colorChanger = new ColorEffects(Colors.GAME_CIRCLE, Colors.ACTIVE_CIRCLE, 0.5f);
+
     }
 
     public void update(float delta) {
 
+        colorChanger.update(delta);
     }
 
 }
