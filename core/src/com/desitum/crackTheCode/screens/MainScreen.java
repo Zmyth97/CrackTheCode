@@ -94,7 +94,7 @@ public class MainScreen implements Screen {
     @Override
     public void render(float delta) {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        Gdx.gl.glClearColor(1, 1, 0.9f, 1);
+        Gdx.gl.glClearColor(1, 1, 1, 1);
 
 
         if (Gdx.input.justTouched()) {
@@ -143,9 +143,13 @@ public class MainScreen implements Screen {
                 mb.onClick();
                 if (mb.getCommand().equals(PLAY)) { // If the button was play
                     state = GAME_RUNNING;
-                } else if (mb.getCommand().equals(SCORE)) { // If the button was high scores
+                    GAME_MODE = 1;
+                } else if (mb.getCommand().equals(ENDLESS)) { // If the button was Endless Mode
+                    state = GAME_RUNNING;
+                    GAME_MODE = 0;
+                }else if (mb.getCommand().equals(SCORE)) { // If the button was high scores
 
-                } else if (mb.getCommand().equals(SOUND)) { // If the button was sound
+                }  else if (mb.getCommand().equals(SOUND)) { // If the button was sound
                     Settings.volumeOn = !Settings.volumeOn; // toggle whether the volume is on
                     if (Settings.volumeOn) { // update the texture for the Sound Button
                         mb.setTexture(Assets.buttonTexture); //No sound on texture yet!
@@ -173,6 +177,10 @@ public class MainScreen implements Screen {
                     score += 1;
                     t.fadeBack();
                     gameWorld.newActiveTile();
+                }
+                if(score == 16)
+                {
+                    state = GAME_OVER;
                 }
             }
         }

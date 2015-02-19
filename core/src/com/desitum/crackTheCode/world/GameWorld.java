@@ -2,6 +2,7 @@ package com.desitum.crackTheCode.world;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.desitum.crackTheCode.data.Assets;
+import com.desitum.crackTheCode.objects.MenuButton;
 import com.desitum.crackTheCode.objects.Tile;
 import com.desitum.crackTheCode.screens.MainScreen;
 
@@ -16,6 +17,7 @@ import java.util.Random;
 
 public class GameWorld {
     ArrayList<Tile> tiles;
+    ArrayList<MenuButton> gameOverButtons;
     private int tileCount;
 
     public GameWorld() {
@@ -28,6 +30,11 @@ public class GameWorld {
             tiles.add(new Tile(3, locX, locY, Assets.buttonTexture));
         }
 
+        gameOverButtons = new ArrayList<MenuButton>();
+        gameOverButtons.add(new MenuButton(MainScreen.PLAY, 1, 6, Assets.buttonTexture));
+        gameOverButtons.add(new MenuButton(MainScreen.SCORE, 1, 4, Assets.buttonTexture));
+        gameOverButtons.add(new MenuButton(MainScreen.SHARE, 1, 2, Assets.buttonTexture));
+
         Collections.shuffle(tiles);
         newActiveTile();
     }
@@ -38,13 +45,16 @@ public class GameWorld {
 
     public void update(int state, OrthographicCamera cam, float delta) {
         if (state == MainScreen.GAME_RUNNING) {
+            for (Tile t : tiles) {
+                t.update(delta);
+            }
+        } else if (state == MainScreen.GAME_OVER) {
+            for (MenuButton mb : gameOverButtons) {
+                mb.setY(mb.getY() + cam.position.y - MainScreen.SCREEN_HEIGHT / 2);
+                mb.update(delta);
+            }
 
         }
-
-        for(Tile t: tiles){
-            t.update(delta);
-        }
-
     }
 
     public ArrayList<Tile> getTiles(){
@@ -65,8 +75,14 @@ public class GameWorld {
         }
     }
 
+    public ArrayList<MenuButton> getGameOverButtons(){
+        return gameOverButtons;
+    }
+
     public void reset() {
-        //Placeholder for MainScreen
+        gameOverButtons.add(new MenuButton(MainScreen.SCORE, 1, 1, Assets.buttonTexture));
+        gameOverButtons.add(new MenuButton(MainScreen.PLAY, 4, 1, Assets.buttonTexture));
+        gameOverButtons.add(new MenuButton(MainScreen.SOUND, 7, 1, Assets.buttonTexture));
     }
 
 }
