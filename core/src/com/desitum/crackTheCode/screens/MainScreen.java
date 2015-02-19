@@ -44,7 +44,7 @@ public class MainScreen implements Screen {
     public static final int GAME_OVER = 6;
     public static final int GAME_OVER_WITH_TRANSITION = 7;
 
-    public static int GAME_MODE = 0;
+    public static int GAME_MODE = 1;
     public static final int ENDLESS_MODE = 0;
     public static final int REGULAR_MODE = 1;
 

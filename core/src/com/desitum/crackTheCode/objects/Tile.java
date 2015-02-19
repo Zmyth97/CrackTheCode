@@ -48,18 +48,18 @@ public class Tile extends Sprite {
         disabled = true;
 
         if(MainScreen.GAME_MODE == MainScreen.REGULAR_MODE) {
-            colorChanger = new ColorEffects(Colors.ACTIVE_CIRCLE, Colors.DISABLED_CIRCLE, 0.5f);
+            colorChanger = new ColorEffects(Colors.ACTIVE_CIRCLE, Colors.DISABLED_CIRCLE, 0.2f);
             colorChanger.start();
         }
         else {
-            colorChanger = new ColorEffects(Colors.ACTIVE_CIRCLE, Colors.GAME_CIRCLE, 0.5f);
+            colorChanger = new ColorEffects(Colors.ACTIVE_CIRCLE, Colors.GAME_CIRCLE, 0.2f);
             colorChanger.start();
         }
     }
 
     public void makeActive(){
         active = true;
-        colorChanger = new ColorEffects(Colors.GAME_CIRCLE, Colors.ACTIVE_CIRCLE, 0.5f);
+        colorChanger = new ColorEffects(Colors.GAME_CIRCLE, Colors.ACTIVE_CIRCLE, 0.2f);
         colorChanger.start();
 
     }

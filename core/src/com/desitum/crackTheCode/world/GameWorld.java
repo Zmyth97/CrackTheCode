@@ -19,13 +19,13 @@ public class GameWorld {
     private int tileCount;
 
     public GameWorld() {
-        tileCount = 24;
+        tileCount = 12;
 
         tiles = new ArrayList<Tile>();
         for(int tilesToDraw = 0; tilesToDraw < tileCount; tilesToDraw++) {
-            float locY = (tilesToDraw/4) * 2.4f + 0.4f;
-            float locX = (tilesToDraw%4) * 2.4f + 0.4f;
-            tiles.add(new Tile(2, locX, locY, Assets.buttonTexture));
+            float locY = (tilesToDraw/3) * 3.33f + 0.33f;
+            float locX = (tilesToDraw%3) * 3.33f + 0.33f;
+            tiles.add(new Tile(3, locX, locY, Assets.buttonTexture));
         }
 
         Collections.shuffle(tiles);
