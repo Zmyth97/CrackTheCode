@@ -143,10 +143,10 @@ public class MainScreen implements Screen {
                 mb.onClick();
                 if (mb.getCommand().equals(PLAY)) { // If the button was play
                     state = GAME_RUNNING;
-                    GAME_MODE = 1;
+                    GAME_MODE = REGULAR_MODE;
                 } else if (mb.getCommand().equals(ENDLESS)) { // If the button was Endless Mode
                     state = GAME_RUNNING;
-                    GAME_MODE = 0;
+                    GAME_MODE = ENDLESS_MODE;
                 }else if (mb.getCommand().equals(SCORE)) { // If the button was high scores
 
                 }  else if (mb.getCommand().equals(SOUND)) { // If the button was sound
