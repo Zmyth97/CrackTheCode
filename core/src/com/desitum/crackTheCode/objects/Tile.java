@@ -1,9 +1,7 @@
 package com.desitum.crackTheCode.objects;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.desitum.crackTheCode.data.Assets;
 import com.desitum.crackTheCode.libraries.ColorEffects;
 import com.desitum.crackTheCode.libraries.Colors;
 import com.desitum.crackTheCode.screens.MainScreen;
@@ -48,11 +46,11 @@ public class Tile extends Sprite {
         disabled = true;
 
         if(MainScreen.GAME_MODE == MainScreen.REGULAR_MODE) {
-            colorChanger = new ColorEffects(Colors.ACTIVE_CIRCLE, Colors.DISABLED_CIRCLE, 0.2f);
+            colorChanger = new ColorEffects(Colors.ACTIVE_CIRCLE, Colors.DISABLED_CIRCLE, 0.5f);
             colorChanger.start();
         }
         else {
-            colorChanger = new ColorEffects(Colors.ACTIVE_CIRCLE, Colors.GAME_CIRCLE, 0.2f);
+            colorChanger = new ColorEffects(Colors.ACTIVE_CIRCLE, Colors.GAME_CIRCLE, 0.5f);
             colorChanger.start();
         }
     }

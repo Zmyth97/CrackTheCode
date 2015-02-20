@@ -19,10 +19,10 @@ public class MenuWorld {
 
     private void createButtons() {
         //Create the buttons!
-        MenuButton playButton = new MenuButton(MainScreen.SCORE, 1, 1, Assets.buttonTexture);
-        MenuButton endlessButton = new MenuButton(MainScreen.PLAY, 1, 5.5f, Assets.buttonTexture);
-        MenuButton scoreButton = new MenuButton(MainScreen.SOUND, 5.5f, 1, Assets.buttonTexture);
-        MenuButton soundButton = new MenuButton(MainScreen.ENDLESS, 5.5f, 5.5f, Assets.buttonTexture);
+        MenuButton playButton = new MenuButton(MainScreen.PLAY, 1, 5.5f, Assets.playButtonTexture);
+        MenuButton endlessButton = new MenuButton(MainScreen.ENDLESS, 5.5f, 5.5f, Assets.endlessButtonTexture);
+        MenuButton scoreButton = new MenuButton(MainScreen.SCORE, 5.5f, 1, Assets.scoreButtonTexture);
+        MenuButton soundButton = new MenuButton(MainScreen.SOUND, 1, 1, Assets.soundButtonOnTexture);
 
         //Add the buttons to the ArrayList
         menuButtons.add(playButton);

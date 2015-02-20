@@ -19,9 +19,6 @@ import com.desitum.crackTheCode.world.GameWorld;
 import com.desitum.crackTheCode.world.MenuRenderer;
 import com.desitum.crackTheCode.world.MenuWorld;
 
-import sun.rmi.runtime.Log;
-import sun.security.ssl.Debug;
-
 /**
  * Created by Zmyth97 on 2/9/2015.
  */
@@ -152,9 +149,9 @@ public class MainScreen implements Screen {
                 }  else if (mb.getCommand().equals(SOUND)) { // If the button was sound
                     Settings.volumeOn = !Settings.volumeOn; // toggle whether the volume is on
                     if (Settings.volumeOn) { // update the texture for the Sound Button
-                        mb.setTexture(Assets.buttonTexture); //No sound on texture yet!
+                        mb.setTexture(Assets.soundButtonOnTexture); //No sound on texture yet!
                     } else {
-                        mb.setTexture(Assets.buttonTexture); //No sound off texture yet!
+                        mb.setTexture(Assets.soundButtonOffTexture); //No sound off texture yet!
                     }
                 }
             }
