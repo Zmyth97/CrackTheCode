@@ -30,6 +30,8 @@ public class MenuRenderer {
         for (MenuButton menuItem : this.world.getMenuButtons()) {
             menuItem.draw(menuBatch);
         }
+
+        menuBatch.draw(Assets.menuTitleTexture, 0, 11, 10, 4);
     }
 
     public void resetCam() {
