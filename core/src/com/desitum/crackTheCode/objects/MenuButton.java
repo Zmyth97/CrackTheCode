@@ -2,7 +2,6 @@ package com.desitum.crackTheCode.objects;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.desitum.crackTheCode.libraries.ScaleAnimation;
 
 /**
  * Created by Zmyth97 on 2/9/2015.
@@ -10,8 +9,6 @@ import com.desitum.crackTheCode.libraries.ScaleAnimation;
 public class MenuButton extends Sprite {
 
     private String command;
-
-    private ScaleAnimation shrinker;
 
     public static float SIZE_X = 3.5f;
     public static float SIZE_Y = 3.5f;

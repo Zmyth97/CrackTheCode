@@ -5,8 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 /**
  * Created by dvan6234 on 2/17/2015.
  */
-public class ColorEffects
-{
+public class ColorEffects {
     private float pointInTransition;
     private float duration;
 
@@ -28,11 +27,11 @@ public class ColorEffects
 
     private boolean transforming;
 
-    public ColorEffects(Color startColor, Color endColor, float duration){
+    public ColorEffects(Color startColor, Color endColor, float duration) {
         transforming = false;
         this.duration = duration;
 
-        if (duration <= 0){
+        if (duration <= 0) {
             currentRed = endColor.r;
             endRed = (int) endColor.r;
             slopeRed = 0;
@@ -49,7 +48,7 @@ public class ColorEffects
         startGreen = startColor.g;
         startBlue = startColor.b;
 
-        slopeRed = (endColor.r - startColor.r) / (duration -0);
+        slopeRed = (endColor.r - startColor.r) / (duration - 0);
         slopeGreen = (endColor.g - startColor.g) / (duration - 0);
         slopeRed = (endColor.g - startColor.g) / (duration - 0);
 
@@ -62,19 +61,19 @@ public class ColorEffects
         endBlue = endColor.b;
     }
 
-    public void start(){
+    public void start() {
         transforming = true;
     }
 
-    public void update(float delta){
-        if (transforming){
+    public void update(float delta) {
+        if (transforming) {
             pointInTransition += delta / duration;
 
             currentRed = slopeRed * pointInTransition + startRed;
             currentGreen = slopeGreen * pointInTransition + startGreen;
             currentBlue = slopeBlue * pointInTransition + startBlue;
 
-            if (pointInTransition >= duration){
+            if (pointInTransition >= duration) {
                 transforming = false;
 
                 currentRed = endRed;
@@ -84,7 +83,7 @@ public class ColorEffects
         }
     }
 
-    public Color getCurrentColor(){
+    public Color getCurrentColor() {
         return new Color(currentRed, currentGreen, currentBlue, 1);
     }
 }
