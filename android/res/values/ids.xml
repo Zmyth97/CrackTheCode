@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Google Play game services IDs.
+Save this file as res/values/games-ids.xml in your project.
+-->
+<resources>
+    <string name="app_id">511452705952</string>
+    <string name="achievement_first_code_broken">CgkIoOnTp_EOEAIQAg</string>
+    <string name="achievement_code_novice">CgkIoOnTp_EOEAIQAw</string>
+    <string name="achievement_code_expert">CgkIoOnTp_EOEAIQBA</string>
+    <string name="achievement_code_master">CgkIoOnTp_EOEAIQBQ</string>
+    <string name="achievement_code_legend">CgkIoOnTp_EOEAIQBg</string>
+    <string name="achievement_endless_beginner">CgkIoOnTp_EOEAIQBw</string>
+    <string name="achievement_endless_novice">CgkIoOnTp_EOEAIQCA</string>
+    <string name="achievement_endless_expert">CgkIoOnTp_EOEAIQCQ</string>
+    <string name="achievement_endless_master">CgkIoOnTp_EOEAIQCg</string>
+    <string name="achievement_endless_legend">CgkIoOnTp_EOEAIQCw</string>
+    <string name="leaderboard_highscore">CgkIoOnTp_EOEAIQAA</string>
+</resources>

@@ -30,4 +30,8 @@ public class Assets {
     public static void loadGameTextures() {
         buttonTexture = new Texture(Gdx.files.internal("game/button.png"));
     }
+
+    public static void dispose(){
+        //TODO Add Disposals!!!!!! (CMON BOY!)
+    }
 }
