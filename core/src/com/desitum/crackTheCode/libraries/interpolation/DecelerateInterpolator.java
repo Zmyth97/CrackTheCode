@@ -1,5 +1,8 @@
-package com.desitum.crackTheCode.libraries;
+package com.desitum.crackTheCode.libraries.interpolation;
 
+/**
+ * Created by dvan6234 on 2/24/2015.
+ */
 /*******************************************************************************
  * Copyright 2011 See AUTHORS file.
  *
@@ -19,18 +22,18 @@ package com.desitum.crackTheCode.libraries;
 import com.badlogic.gdx.utils.Pool;
 
 /**
- * An interpolator where the rate of change starts out slowly, grows over time and ends slowly.
+ * An interpolator where the rate of change starts out fast and then decelerates over time.
  *
  * @author Moritz Post <moritzpost@gmail.com>
  */
-public class AccelerateDecelerateInterpolator implements Interpolator {
+public class DecelerateInterpolator implements Interpolator {
 
     private static final float DEFAULT_FACTOR = 1.0f;
 
-    private static final Pool<AccelerateDecelerateInterpolator> pool = new Pool<AccelerateDecelerateInterpolator>(4, 100) {
+    private static final Pool<DecelerateInterpolator> pool = new Pool<DecelerateInterpolator>(4, 100) {
         @Override
-        protected AccelerateDecelerateInterpolator newObject() {
-            return new AccelerateDecelerateInterpolator();
+        protected DecelerateInterpolator newObject() {
+            return new DecelerateInterpolator();
         }
     };
 
@@ -38,31 +41,31 @@ public class AccelerateDecelerateInterpolator implements Interpolator {
 
     private double doubledFactor;
 
-    AccelerateDecelerateInterpolator() {
+    DecelerateInterpolator() {
         // hide constructor
     }
 
     /**
-     * Gets a new {@link AccelerateDecelerateInterpolator} from a maintained pool of {@link Interpolator}s.
+     * Gets a new {@link DecelerateInterpolator} from a maintained pool of {@link Interpolator}s.
      *
-     * @param factor the factor controlling the rate of speed change
-     * @return the obtained {@link AccelerateDecelerateInterpolator}
+     * @param factor the factor controlling the rate of change
+     * @return the obtained {@link DecelerateInterpolator}
      */
-    public static AccelerateDecelerateInterpolator $(float factor) {
-        AccelerateDecelerateInterpolator inter = pool.obtain();
+    public static DecelerateInterpolator $(float factor) {
+        DecelerateInterpolator inter = pool.obtain();
         inter.factor = factor;
         inter.doubledFactor = factor * 2;
         return inter;
     }
 
     /**
-     * Gets a new {@link AccelerateDecelerateInterpolator} from a maintained pool of {@link Interpolator}s.
+     * Gets a new {@link DecelerateInterpolator} from a maintained pool of {@link Interpolator}s.
      * <p/>
-     * The initial factor is set to <code>{@value AccelerateDecelerateInterpolator#DEFAULT_FACTOR}</code>.
+     * The initial factor is set to <code>{@value DecelerateInterpolator#DEFAULT_FACTOR}</code>.
      *
-     * @return the obtained {@link AccelerateDecelerateInterpolator}
+     * @return the obtained {@link DecelerateInterpolator}
      */
-    public static AccelerateDecelerateInterpolator $() {
+    public static DecelerateInterpolator $() {
         return $(DEFAULT_FACTOR);
     }
 
@@ -72,7 +75,11 @@ public class AccelerateDecelerateInterpolator implements Interpolator {
     }
 
     public float getInterpolation(float input) {
-        return (float) (Math.cos((input + 1) * Math.PI) / 2.0f) + 0.5f;
+        if (factor == 1.0f) {
+            return 1.0f - (1.0f - input) * (1.0f - input);
+        } else {
+            return (float) (1.0f - Math.pow((1.0f - input), doubledFactor));
+        }
     }
 
     @Override

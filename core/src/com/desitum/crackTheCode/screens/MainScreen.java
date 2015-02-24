@@ -144,9 +144,9 @@ public class MainScreen implements Screen {
                 } else if (mb.getCommand().equals(ENDLESS)) { // If the button was Endless Mode
                     state = GAME_RUNNING;
                     GAME_MODE = ENDLESS_MODE;
-                }else if (mb.getCommand().equals(SCORE)) { // If the button was high scores
+                } else if (mb.getCommand().equals(SCORE)) { // If the button was high scores
 
-                }  else if (mb.getCommand().equals(SOUND)) { // If the button was sound
+                } else if (mb.getCommand().equals(SOUND)) { // If the button was sound
                     Settings.volumeOn = !Settings.volumeOn; // toggle whether the volume is on
                     if (Settings.volumeOn) { // update the texture for the Sound Button
                         mb.setTexture(Assets.soundButtonOnTexture); //No sound on texture yet!
@@ -168,15 +168,14 @@ public class MainScreen implements Screen {
 
     private void onClickGameRunning() {
         System.out.println("clicked:");
-        for (Tile t: gameWorld.getTiles()){
-            if (CollisionDetection.pointInRectangle(t.getBoundingRectangle(), touchPoint)){
-                if (t.isActive()){
+        for (Tile t : gameWorld.getTiles()) {
+            if (CollisionDetection.pointInRectangle(t.getBoundingRectangle(), touchPoint)) {
+                if (t.isActive()) {
                     score += 1;
                     t.fadeBack();
                     gameWorld.newActiveTile();
                 }
-                if(score == 16)
-                {
+                if (score == 16) {
                     state = GAME_OVER;
                 }
             }
@@ -216,19 +215,19 @@ public class MainScreen implements Screen {
         }
     }
 
-    private void updateMenuBeforeTransition(float delta){
+    private void updateMenuBeforeTransition(float delta) {
         menuWorld.update(delta);
     }
 
-    private void updateMenuTransition(float delta){
+    private void updateMenuTransition(float delta) {
         menuWorld.update(delta);
     }
 
-    private void updateMenuWaiting(float delta){
+    private void updateMenuWaiting(float delta) {
         menuWorld.update(delta);
     }
 
-    private void updateGameBefore(float delta){
+    private void updateGameBefore(float delta) {
         gameWorld.update(state, gameRenderer.getCam(), delta);
     }
 
@@ -244,7 +243,7 @@ public class MainScreen implements Screen {
         gameWorld.update(state, gameRenderer.getCam(), delta);
     }
 
-    private void updateGameOverTransition(float delta){
+    private void updateGameOverTransition(float delta) {
 
     }
 
@@ -317,8 +316,7 @@ public class MainScreen implements Screen {
     }
 
     @Override
-    public void resize(int width, int height)
-    {
+    public void resize(int width, int height) {
         //notice that the method receives the entire screen size
         //the last argument tells the viewport to center the camera in the screen
         viewport.update(width, height, true);

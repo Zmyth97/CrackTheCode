@@ -28,10 +28,11 @@ public class MenuButton extends Sprite {
         }
     }
 
-    public void scaleOverShoot(){
+    public void scaleOverShoot() {
 
     }
-    public void onClick(){
+
+    public void onClick() {
         //shrinker.start();
     }
 

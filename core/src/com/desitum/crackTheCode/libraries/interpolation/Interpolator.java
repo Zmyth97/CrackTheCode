@@ -1,4 +1,4 @@
-package com.desitum.crackTheCode.libraries;
+package com.desitum.crackTheCode.libraries.interpolation;
 /*******************************************************************************
  * Copyright 2011 See AUTHORS file.
  *

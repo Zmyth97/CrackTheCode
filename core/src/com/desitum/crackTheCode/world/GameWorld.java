@@ -24,9 +24,9 @@ public class GameWorld {
         tileCount = 12;
 
         tiles = new ArrayList<Tile>();
-        for(int tilesToDraw = 0; tilesToDraw < tileCount; tilesToDraw++) {
-            float locY = (tilesToDraw/3) * 3.33f + 0.33f;
-            float locX = (tilesToDraw%3) * 3.33f + 0.33f;
+        for (int tilesToDraw = 0; tilesToDraw < tileCount; tilesToDraw++) {
+            float locY = (tilesToDraw / 3) * 3.33f + 0.33f;
+            float locX = (tilesToDraw % 3) * 3.33f + 0.33f;
             tiles.add(new Tile(3, locX, locY, Assets.buttonTexture));
         }
 
@@ -39,7 +39,7 @@ public class GameWorld {
         newActiveTile();
     }
 
-    public void setGameMode(){
+    public void setGameMode() {
 
     }
 
@@ -57,17 +57,17 @@ public class GameWorld {
         }
     }
 
-    public ArrayList<Tile> getTiles(){
+    public ArrayList<Tile> getTiles() {
         return tiles;
     }
 
-    public void newActiveTile(){
-        if (MainScreen.GAME_MODE == MainScreen.ENDLESS_MODE){
+    public void newActiveTile() {
+        if (MainScreen.GAME_MODE == MainScreen.ENDLESS_MODE) {
             Random r = new Random();
             tiles.get(r.nextInt(tiles.size())).makeActive();
         } else {
-            for (Tile t: tiles){
-                if (!t.isDisabled()){
+            for (Tile t : tiles) {
+                if (!t.isDisabled()) {
                     t.makeActive();
                     break;
                 }
@@ -75,7 +75,7 @@ public class GameWorld {
         }
     }
 
-    public ArrayList<MenuButton> getGameOverButtons(){
+    public ArrayList<MenuButton> getGameOverButtons() {
         return gameOverButtons;
     }
 

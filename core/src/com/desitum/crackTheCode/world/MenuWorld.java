@@ -31,8 +31,8 @@ public class MenuWorld {
         menuButtons.add(soundButton);
     }
 
-    public void update(float delta){
-        for (MenuButton mb: menuButtons){
+    public void update(float delta) {
+        for (MenuButton mb : menuButtons) {
             mb.update(delta);
         }
     }

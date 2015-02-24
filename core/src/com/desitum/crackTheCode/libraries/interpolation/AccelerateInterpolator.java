@@ -1,4 +1,4 @@
-package com.desitum.crackTheCode.libraries;
+package com.desitum.crackTheCode.libraries.interpolation;
 
 /**
  * Created by dvan6234 on 2/24/2015.
@@ -22,20 +22,18 @@ package com.desitum.crackTheCode.libraries;
 import com.badlogic.gdx.utils.Pool;
 
 /**
- * An interpolator where the change overshoots the target and springs back to the target position.
- * <p/>
- * The factor defines the rate of overshoot.
+ * An interpolator where the rate of change starts out slowly and then accelerates over time.
  *
  * @author Moritz Post <moritzpost@gmail.com>
  */
-public class OvershootInterpolator implements Interpolator {
+public class AccelerateInterpolator implements Interpolator {
 
     private static final float DEFAULT_FACTOR = 1.0f;
 
-    private static final Pool<OvershootInterpolator> pool = new Pool<OvershootInterpolator>(4, 100) {
+    private static final Pool<AccelerateInterpolator> pool = new Pool<AccelerateInterpolator>(4, 100) {
         @Override
-        protected OvershootInterpolator newObject() {
-            return new OvershootInterpolator();
+        protected AccelerateInterpolator newObject() {
+            return new AccelerateInterpolator();
         }
     };
 
@@ -43,31 +41,31 @@ public class OvershootInterpolator implements Interpolator {
 
     private double doubledFactor;
 
-    OvershootInterpolator() {
+    AccelerateInterpolator() {
         // hide constructor
     }
 
     /**
-     * Gets a new {@link OvershootInterpolator} from a maintained pool of {@link Interpolator}s.
+     * Gets a new {@link AccelerateInterpolator} from a maintained pool of {@link Interpolator}s.
      *
-     * @param factor the factor controlling the rate of overshoot energy change
-     * @return the obtained {@link OvershootInterpolator}
+     * @param factor the factor controlling the rate of change
+     * @return the obtained {@link AccelerateInterpolator}
      */
-    public static OvershootInterpolator $(float factor) {
-        OvershootInterpolator inter = pool.obtain();
+    public static AccelerateInterpolator $(float factor) {
+        AccelerateInterpolator inter = pool.obtain();
         inter.factor = factor;
         inter.doubledFactor = factor * 2;
         return inter;
     }
 
     /**
-     * Gets a new {@link OvershootInterpolator} from a maintained pool of {@link Interpolator}s.
+     * Gets a new {@link AccelerateInterpolator} from a maintained pool of {@link Interpolator}s.
      * <p/>
-     * The initial factor is set to <code>{@value OvershootInterpolator#DEFAULT_FACTOR}</code>.
+     * The initial factor is set to <code>{@value AccelerateInterpolator#DEFAULT_FACTOR}</code>.
      *
-     * @return the obtained {@link OvershootInterpolator}
+     * @return the obtained {@link AccelerateInterpolator}
      */
-    public static OvershootInterpolator $() {
+    public static AccelerateInterpolator $() {
         return $(DEFAULT_FACTOR);
     }
 
@@ -76,9 +74,12 @@ public class OvershootInterpolator implements Interpolator {
         pool.free(this);
     }
 
-    public float getInterpolation(float t) {
-        t -= 1.0f;
-        return t * t * ((factor + 1) * t + factor) + 1.0f;
+    public float getInterpolation(float input) {
+        if (factor == 1.0f) {
+            return input * input;
+        } else {
+            return (float) Math.pow(input, doubledFactor);
+        }
     }
 
     @Override
