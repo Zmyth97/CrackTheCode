@@ -12,26 +12,44 @@ import java.util.ArrayList;
 public class MenuWorld {
     private ArrayList<MenuButton> menuButtons;
 
+    private float loadTiming;
+
+    private MenuButton playButton;
+    private MenuButton endlessButton;
+    private MenuButton scoreButton;
+    private MenuButton soundButton;
+
     public MenuWorld() {
         menuButtons = new ArrayList<MenuButton>();
         createButtons();
+        loadTiming = 0;
     }
 
     private void createButtons() {
         //Create the buttons!
-        MenuButton playButton = new MenuButton(MainScreen.PLAY, 1, 5.5f, Assets.playButtonTexture);
-        MenuButton endlessButton = new MenuButton(MainScreen.ENDLESS, 5.5f, 5.5f, Assets.endlessButtonTexture);
-        MenuButton scoreButton = new MenuButton(MainScreen.SCORE, 5.5f, 1, Assets.scoreButtonTexture);
-        MenuButton soundButton = new MenuButton(MainScreen.SOUND, 1, 1, Assets.soundButtonOnTexture);
+        playButton = new MenuButton(MainScreen.PLAY, 1, 5.5f, Assets.playButtonTexture);
+        endlessButton = new MenuButton(MainScreen.ENDLESS, 5.5f, 5.5f, Assets.endlessButtonTexture);
+        scoreButton = new MenuButton(MainScreen.SCORE, 5.5f, 1, Assets.scoreButtonTexture);
+        soundButton = new MenuButton(MainScreen.SOUND, 1, 1, Assets.soundButtonOnTexture);
 
         //Add the buttons to the ArrayList
         menuButtons.add(playButton);
         menuButtons.add(endlessButton);
         menuButtons.add(scoreButton);
         menuButtons.add(soundButton);
+
+        playButton.appear();
     }
 
     public void update(float delta) {
+        loadTiming += delta;
+        if (loadTiming > 0.15f){
+            soundButton.appear();
+            endlessButton.appear();
+        }
+        if (loadTiming > 0.3f){
+            scoreButton.appear();
+        }
         for (MenuButton mb : menuButtons) {
             mb.update(delta);
         }

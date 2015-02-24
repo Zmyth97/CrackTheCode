@@ -30,7 +30,7 @@ import com.badlogic.gdx.utils.Pool;
  */
 public class OvershootInterpolator implements Interpolator {
 
-    private static final float DEFAULT_FACTOR = 1.0f;
+    private static final float DEFAULT_FACTOR = 1.1f;
 
     private static final Pool<OvershootInterpolator> pool = new Pool<OvershootInterpolator>(4, 100) {
         @Override
