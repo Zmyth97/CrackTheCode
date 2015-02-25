@@ -7,6 +7,7 @@ import com.desitum.crackTheCode.libraries.interpolation.BounceInterpolator;
 import com.desitum.crackTheCode.libraries.interpolation.DecelerateInterpolator;
 import com.desitum.crackTheCode.libraries.interpolation.Interpolation;
 import com.desitum.crackTheCode.libraries.interpolation.Interpolator;
+import com.desitum.crackTheCode.libraries.interpolation.OvershootInterpolator;
 
 /**
  * Created by dvan6234 on 2/24/2015.
@@ -14,6 +15,7 @@ import com.desitum.crackTheCode.libraries.interpolation.Interpolator;
 public class ScaleAnimator implements Animator {
 
     private float duration;
+    private float startScale;
     private float endScale;
 
     private float scaleSize;
@@ -22,13 +24,22 @@ public class ScaleAnimator implements Animator {
 
     private boolean running;
     private boolean ran;
+    private boolean growing;
 
     private Interpolator interpolator;
 
     public ScaleAnimator(float duration, float startScale, float endScale, int interpolator){
         this.duration = duration;
-        this.timeInAnimation = startScale;
+        this.startScale = startScale;
         this.endScale = endScale;
+
+        if (startScale > endScale){
+            growing = false;
+            this.timeInAnimation = 0;
+        } else {
+            growing = true;
+            this.timeInAnimation = startScale;
+        }
 
         setupInterpolator(interpolator);
     }
@@ -38,13 +49,26 @@ public class ScaleAnimator implements Animator {
         if (!running){
             return;
         }
-        timeInAnimation += delta/duration;
-        if (timeInAnimation >= endScale){
-            timeInAnimation = endScale;
-            stop();
+
+        timeInAnimation += delta / duration;
+
+        if (growing) {
+            if (timeInAnimation >= endScale) {
+                timeInAnimation = endScale;
+                stop();
+            }
+
+            scaleSize = interpolator.getInterpolation(timeInAnimation);
+        } else {
+            if (timeInAnimation >= endScale-startScale) {
+                //timeInAnimation = endScale;
+                //stop();
+            }
+
+            scaleSize = startScale - interpolator.getInterpolation(timeInAnimation);
+            System.out.println("scaleSize: " + scaleSize);
         }
 
-        scaleSize = interpolator.getInterpolation(timeInAnimation);
     }
 
     public float getScaleSize(){
@@ -54,7 +78,7 @@ public class ScaleAnimator implements Animator {
     public void start(boolean isProtected){
         if (isProtected && !ran){
             running = true;
-        } else {
+        } else  if (!isProtected) {
             running = true;
         }
         ran = true;
@@ -72,7 +96,7 @@ public class ScaleAnimator implements Animator {
         } else if (interpolator == Interpolation.ANTICIPATE_INTERPOLATOR){
             this.interpolator = AnticipateInterpolator.$();
         } else if (interpolator == Interpolation.OVERSHOOT_INTERPOLATOR){
-            this.interpolator = BounceInterpolator.$();
+            this.interpolator = OvershootInterpolator.$();
         } else if (interpolator == Interpolation.ACCELERATE_DECELERATE_INTERPOLATOR){
             this.interpolator = AccelerateDecelerateInterpolator.$();
         } else if (interpolator == Interpolation.BOUNCE_INTERPOLATOR){

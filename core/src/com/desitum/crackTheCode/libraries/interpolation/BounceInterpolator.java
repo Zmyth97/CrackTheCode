@@ -30,7 +30,7 @@ import com.badlogic.gdx.utils.Pool;
  */
 public class BounceInterpolator implements Interpolator {
 
-    private static final float DEFAULT_FACTOR = 1.1f;
+    private static final float DEFAULT_FACTOR = 1.8f;
 
     private static final Pool<BounceInterpolator> pool = new Pool<BounceInterpolator>(4, 100) {
         @Override

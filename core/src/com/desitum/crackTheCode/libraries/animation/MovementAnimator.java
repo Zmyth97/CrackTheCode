@@ -7,6 +7,7 @@ import com.desitum.crackTheCode.libraries.interpolation.BounceInterpolator;
 import com.desitum.crackTheCode.libraries.interpolation.DecelerateInterpolator;
 import com.desitum.crackTheCode.libraries.interpolation.Interpolation;
 import com.desitum.crackTheCode.libraries.interpolation.Interpolator;
+import com.desitum.crackTheCode.libraries.interpolation.OvershootInterpolator;
 
 /**
  * Created by kody on 2/24/15.
@@ -53,7 +54,7 @@ public class MovementAnimator {
     public void start(boolean isProtected){
         if (isProtected && !ran){
             running = true;
-        } else {
+        } else if (!isProtected) {
             running = true;
         }
         ran = true;
@@ -71,7 +72,7 @@ public class MovementAnimator {
         } else if (interpolator == Interpolation.ANTICIPATE_INTERPOLATOR){
             this.interpolator = AnticipateInterpolator.$();
         } else if (interpolator == Interpolation.OVERSHOOT_INTERPOLATOR){
-            this.interpolator = BounceInterpolator.$();
+            this.interpolator = OvershootInterpolator.$();
         } else if (interpolator == Interpolation.ACCELERATE_DECELERATE_INTERPOLATOR){
             this.interpolator = AccelerateDecelerateInterpolator.$();
         } else if (interpolator == Interpolation.BOUNCE_INTERPOLATOR){

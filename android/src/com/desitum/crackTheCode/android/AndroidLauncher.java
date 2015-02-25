@@ -255,7 +255,7 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
                     .addOnConnectionFailedListener(this)
                     .build();
         }
-        mGoogleApiClient.connect();
+        //mGoogleApiClient.connect();
     }
 
     /**
