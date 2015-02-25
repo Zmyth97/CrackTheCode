@@ -58,6 +58,7 @@ public class SplashScreen implements Screen {
             hasLoaded = true;
             Assets.loadMenuTextures();
             Assets.loadGameTextures();
+            Assets.loadSounds();
             Colors.load();
             Settings.load();
         }

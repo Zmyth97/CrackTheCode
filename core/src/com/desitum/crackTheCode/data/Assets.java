@@ -1,6 +1,7 @@
 package com.desitum.crackTheCode.data;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 
 /**
@@ -16,7 +17,8 @@ public class Assets {
     public static Texture menuTitleTexture;
 
     public static Texture buttonTexture;
-    public static Texture activeButtonTexture;
+
+    public static Sound buttonSound;
 
     public static void loadMenuTextures() {
         playButtonTexture = new Texture(Gdx.files.internal("menu/playButton.png"));
@@ -29,6 +31,11 @@ public class Assets {
 
     public static void loadGameTextures() {
         buttonTexture = new Texture(Gdx.files.internal("game/button.png"));
+    }
+
+    public static void loadSounds(){
+        buttonSound = Gdx.audio.newSound(Gdx.files.internal("sound/Click.mp3"));
+        //buttonSound = Gdx.audio.newSound(Gdx.files.internal("sound/Blop.mp3"));
     }
 
     public static void dispose(){

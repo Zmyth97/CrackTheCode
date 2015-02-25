@@ -174,6 +174,7 @@ public class MainScreen implements Screen {
                 if (t.isActive()) {
                     score += 1;
                     t.fadeBack();
+                    Assets.buttonSound.play(Settings.volume);
                     gameWorld.newActiveTile();
                 }
                 if (score == 16) {
