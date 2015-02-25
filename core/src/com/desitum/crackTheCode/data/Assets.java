@@ -35,7 +35,6 @@ public class Assets {
 
     public static void loadSounds(){
         buttonSound = Gdx.audio.newSound(Gdx.files.internal("sound/Click.mp3"));
-        //buttonSound = Gdx.audio.newSound(Gdx.files.internal("sound/Blop.mp3"));
     }
 
     public static void dispose(){
