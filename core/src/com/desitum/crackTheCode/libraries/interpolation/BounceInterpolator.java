@@ -28,14 +28,14 @@ import com.badlogic.gdx.utils.Pool;
  *
  * @author Moritz Post <moritzpost@gmail.com>
  */
-public class OvershootInterpolator implements Interpolator {
+public class BounceInterpolator implements Interpolator {
 
     private static final float DEFAULT_FACTOR = 1.1f;
 
-    private static final Pool<OvershootInterpolator> pool = new Pool<OvershootInterpolator>(4, 100) {
+    private static final Pool<BounceInterpolator> pool = new Pool<BounceInterpolator>(4, 100) {
         @Override
-        protected OvershootInterpolator newObject() {
-            return new OvershootInterpolator();
+        protected BounceInterpolator newObject() {
+            return new BounceInterpolator();
         }
     };
 
@@ -43,7 +43,7 @@ public class OvershootInterpolator implements Interpolator {
 
     private double doubledFactor;
 
-    OvershootInterpolator() {
+    BounceInterpolator() {
         // hide constructor
     }
 
@@ -53,8 +53,8 @@ public class OvershootInterpolator implements Interpolator {
      * @param factor the factor controlling the rate of overshoot energy change
      * @return the obtained {@link BounceInterpolator}
      */
-    public static OvershootInterpolator $(float factor) {
-        OvershootInterpolator inter = pool.obtain();
+    public static BounceInterpolator $(float factor) {
+        BounceInterpolator inter = pool.obtain();
         inter.factor = factor;
         inter.doubledFactor = factor * 2;
         return inter;
@@ -67,7 +67,7 @@ public class OvershootInterpolator implements Interpolator {
      *
      * @return the obtained {@link BounceInterpolator}
      */
-    public static OvershootInterpolator $() {
+    public static BounceInterpolator $() {
         return $(DEFAULT_FACTOR);
     }
 
@@ -78,7 +78,7 @@ public class OvershootInterpolator implements Interpolator {
 
     public float getInterpolation(float t) {
         t -= 1.0f;
-        return t * t * ((factor + 1) * t + factor) + 1.0f;
+        return -Math.abs(t * t * ((factor + 1) * t + factor))+1;
     }
 
     @Override
@@ -86,3 +86,4 @@ public class OvershootInterpolator implements Interpolator {
         return $(factor);
     }
 }
+

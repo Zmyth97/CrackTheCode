@@ -9,46 +9,45 @@ import com.desitum.crackTheCode.libraries.interpolation.Interpolation;
 import com.desitum.crackTheCode.libraries.interpolation.Interpolator;
 
 /**
- * Created by dvan6234 on 2/24/2015.
+ * Created by kody on 2/24/15.
+ * can be used by kody and people in []
  */
-public class ScaleAnimator implements Animator {
+public class MovementAnimator {
+
+    private float startPos;
+    private float endPos;
+    private float travelDistance;
+    private float currentPosition;
 
     private float duration;
-    private float endScale;
-
-    private float scaleSize;
-
     private float timeInAnimation;
 
     private boolean running;
     private boolean ran;
-
     private Interpolator interpolator;
 
-    public ScaleAnimator(float duration, float startScale, float endScale, int interpolator){
+    public MovementAnimator(float startPos, float endPos, float duration, int interpolator){
+        this.startPos = startPos;
+        this.endPos = endPos;
+        this.travelDistance = endPos - startPos;
+        this.currentPosition = startPos;
+
         this.duration = duration;
-        this.timeInAnimation = startScale;
-        this.endScale = endScale;
 
         setupInterpolator(interpolator);
     }
 
-    @Override
     public void update(float delta){
         if (!running){
             return;
         }
         timeInAnimation += delta/duration;
-        if (timeInAnimation >= endScale){
-            timeInAnimation = endScale;
+        if (timeInAnimation >= 1){
+            timeInAnimation = 1;
             stop();
         }
 
-        scaleSize = interpolator.getInterpolation(timeInAnimation);
-    }
-
-    public float getScaleSize(){
-        return scaleSize;
+        currentPosition = interpolator.getInterpolation(timeInAnimation) * travelDistance + startPos;
     }
 
     public void start(boolean isProtected){

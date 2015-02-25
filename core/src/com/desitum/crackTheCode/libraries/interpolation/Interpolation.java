@@ -10,4 +10,5 @@ public class Interpolation {
     public static final int ACCELERATE_INTERPOLATOR = 3;
     public static final int LINEAR_INTERPOLATOR = 4;
     public static final int ACCELERATE_DECELERATE_INTERPOLATOR = 5;
+    public static final int BOUNCE_INTERPOLATOR = 6;
 }
