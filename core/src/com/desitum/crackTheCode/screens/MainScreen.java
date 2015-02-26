@@ -363,9 +363,9 @@ public class MainScreen implements Screen {
         spriteBatch.setProjectionMatrix(cam.combined);
 
         if(GAME_MODE == REGULAR_MODE) {
-            float width = Assets.font.getBounds("HEYO" + String.valueOf(codesBroken)).width/2;
-            float height = Assets.font.getBounds("HEYO" + codesBroken).height;
-            Assets.font.draw(spriteBatch, "HEYO" + String.valueOf(codesBroken), SCREEN_WIDTH * 10 / 2 - width, height);
+            float width = Assets.font.getBounds("f" + String.valueOf(codesBroken)).width/2;
+            float height = Assets.font.getBounds("f" + codesBroken).height;
+            Assets.font.draw(spriteBatch, "f" + String.valueOf(codesBroken), SCREEN_WIDTH / 2 - width, 10  + height);
         } else {
             float width = Assets.font.getBounds(String.valueOf(score)).width/2;
             float height = Assets.font.getBounds("" + score).height;
@@ -378,11 +378,11 @@ public class MainScreen implements Screen {
         spriteBatch.setProjectionMatrix(cam.combined);
 
         if(GAME_MODE == REGULAR_MODE) {
-            Assets.font.setScale(0.1f);
-            float width = Assets.font.getBounds("Highscore: " + Settings.regularHighscore).width / 2;
-            float height = Assets.font.getBounds("Highscore" + Settings.regularHighscore).height;
-            Assets.font.draw(spriteBatch, "Highscore: " + Settings.regularHighscore, SCREEN_WIDTH * 10 / 2 - width, 10 * 10 + height);
-            Assets.font.setScale(0.25f);
+            Assets.font.setScale(0.010f);
+            float width = Assets.font.getBounds("000 : " + Settings.regularHighscore).width / 2;
+            float height = Assets.font.getBounds("000 : " + Settings.regularHighscore).height;
+            Assets.font.draw(spriteBatch, "000 : " + Settings.regularHighscore, SCREEN_WIDTH / 2 - width, 12  + height);
+            Assets.font.setScale(0.010f);
         } else {
             Assets.font.setScale(0.1f);
             float width = Assets.font.getBounds("Highscore: " + Settings.endlessHighscore).width / 2;
@@ -394,7 +394,7 @@ public class MainScreen implements Screen {
         if(GAME_MODE == REGULAR_MODE) {
             float width = Assets.font.getBounds(String.valueOf(codesBroken)).width/2;
             float height = Assets.font.getBounds("" + codesBroken).height;
-            Assets.font.draw(spriteBatch, String.valueOf(codesBroken), SCREEN_WIDTH * 10 / 2 - width, 8 * 10 + height);
+            Assets.font.draw(spriteBatch, String.valueOf(codesBroken), SCREEN_WIDTH * 10 - width, 8 * 10 + height);
         } else {
             float width = Assets.font.getBounds(String.valueOf(score)).width/2;
             float height = Assets.font.getBounds("" + score).height;

@@ -32,7 +32,7 @@ public class Assets {
         soundButtonOnTexture = new Texture(Gdx.files.internal("menu/soundButtonOn.png"));
         menuTitleTexture = new Texture(Gdx.files.internal("menu/menuTitle.png"));
         font = new BitmapFont(Gdx.files.internal("font/cartoon.fnt"), Gdx.files.internal("font/cartoon.png"), false);
-        font.setScale(0.25f);
+        font.setScale(0.015f);
         font.setColor(Color.BLACK);
     }
 
