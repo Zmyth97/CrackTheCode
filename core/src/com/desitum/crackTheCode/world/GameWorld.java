@@ -46,6 +46,12 @@ public class GameWorld {
     }
 
     public void newScreen(){
+        Tile tileToAdd =  null;
+        for (Tile t: tiles){
+            if (t.isFillingScreen()){
+                tileToAdd = t;
+            }
+        }
         tiles = new ArrayList<Tile>();
         for (int tilesToDraw = 0; tilesToDraw < tileCount; tilesToDraw++) {
             float locY = (tilesToDraw / 3) * 3.33f + 0.33f;
@@ -53,6 +59,7 @@ public class GameWorld {
             tiles.add(new Tile(3, locX, locY, Assets.buttonTexture));
         }
         Collections.shuffle(tiles);
+        if (tileToAdd != null) tiles.add(tileToAdd);
         newActiveTile();
     }
 

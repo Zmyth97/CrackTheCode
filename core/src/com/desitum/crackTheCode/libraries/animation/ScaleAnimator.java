@@ -82,6 +82,17 @@ public class ScaleAnimator implements Animator {
         running = false;
     }
 
+    public boolean didFinish(){
+        if (ran && !running){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isRunning(){
+        return running;
+    }
+
     private void setupInterpolator(int interpolator){
         if (interpolator == Interpolation.ACCELERATE_INTERPOLATOR){
             this.interpolator = AccelerateInterpolator.$();

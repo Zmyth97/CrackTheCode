@@ -175,12 +175,10 @@ public class MainScreen implements Screen {
     }
 
     private void onClickGameRunning() {
-        System.out.println("clicked:");
         for (Tile t : gameWorld.getTiles()) {
             if (CollisionDetection.pointInRectangle(t.getBoundingRectangle(), touchPoint)) {
                 if (t.isActive()) {
                     score += 1;
-                    System.out.println("Score: " + score);
                     tileCounter += 1;
                     t.fadeBack();
                     Assets.buttonSound.play(Settings.volume);
@@ -193,7 +191,6 @@ public class MainScreen implements Screen {
                     t.fillScreen(); //Works, but doesn't show thanks to newScreen() overwriting it.
                     tileCounter = 0;
                     codesBroken+=1;
-                    System.out.println("CodesBroken: " + codesBroken);
                     gameWorld.newScreen();
 
                 }
@@ -253,7 +250,6 @@ public class MainScreen implements Screen {
     private void updateGameRunning(float delta) {
         gameWorld.update(state, gameRenderer.getCam(), delta);
         gameTimer += delta;
-        System.out.println("GameTimer: " + gameTimer);
         if(gameTimer >= 8){
             state = GAME_OVER;
             if(GAME_MODE == REGULAR_MODE) {
