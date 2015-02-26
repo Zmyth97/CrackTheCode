@@ -65,7 +65,6 @@ public class GameWorld {
             }
         } else if (state == MainScreen.GAME_OVER) {
             for (MenuButton mb : gameOverButtons) {
-                mb.setY(mb.getY() + cam.position.y - MainScreen.SCREEN_HEIGHT / 2);
                 mb.update(delta);
             }
 
