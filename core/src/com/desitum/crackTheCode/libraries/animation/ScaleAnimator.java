@@ -33,12 +33,12 @@ public class ScaleAnimator implements Animator {
         this.startScale = startScale;
         this.endScale = endScale;
 
+        timeInAnimation = 0;
+
         if (startScale > endScale){
             growing = false;
-            this.timeInAnimation = 0;
         } else {
             growing = true;
-            this.timeInAnimation = startScale;
         }
 
         setupInterpolator(interpolator);
@@ -52,21 +52,15 @@ public class ScaleAnimator implements Animator {
 
         timeInAnimation += delta / duration;
 
-        if (growing) {
-            if (timeInAnimation >= endScale) {
-                timeInAnimation = endScale;
-                stop();
-            }
+        if (timeInAnimation >= 1){
+            timeInAnimation = 1;
+            stop();
+        }
 
-            scaleSize = interpolator.getInterpolation(timeInAnimation);
+        if (growing){
+            scaleSize = startScale + (endScale - startScale) * interpolator.getInterpolation(timeInAnimation);
         } else {
-            if (timeInAnimation >= endScale-startScale) {
-                //timeInAnimation = endScale;
-                //stop();
-            }
-
-            scaleSize = startScale - interpolator.getInterpolation(timeInAnimation);
-            System.out.println("scaleSize: " + scaleSize);
+            scaleSize = startScale - (startScale - endScale) * interpolator.getInterpolation(timeInAnimation);
         }
 
     }

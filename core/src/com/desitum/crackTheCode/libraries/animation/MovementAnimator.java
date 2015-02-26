@@ -51,6 +51,10 @@ public class MovementAnimator {
         currentPosition = interpolator.getInterpolation(timeInAnimation) * travelDistance + startPos;
     }
 
+    public float getCurrentPos(){
+        return currentPosition;
+    }
+
     public void start(boolean isProtected){
         if (isProtected && !ran){
             running = true;

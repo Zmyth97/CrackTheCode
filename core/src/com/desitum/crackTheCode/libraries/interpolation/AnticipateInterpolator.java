@@ -28,7 +28,7 @@ import com.badlogic.gdx.utils.Pool;
  */
 public class AnticipateInterpolator implements Interpolator {
 
-    private static final float DEFAULT_TENSION = 2.0f;
+    private static final float DEFAULT_TENSION = 2f;
 
     private static final Pool<AnticipateInterpolator> pool = new Pool<AnticipateInterpolator>(4, 100) {
         @Override

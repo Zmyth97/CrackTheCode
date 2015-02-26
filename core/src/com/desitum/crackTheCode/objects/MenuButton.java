@@ -25,7 +25,7 @@ public class MenuButton extends Sprite {
         this.setSize(SIZE_X, SIZE_Y);
         setOriginCenter();
 
-        appearAnimator = new ScaleAnimator(0.8f, 0, 1f, Interpolation.OVERSHOOT_INTERPOLATOR);
+        appearAnimator = new ScaleAnimator(0.8f, 0, 1, Interpolation.OVERSHOOT_INTERPOLATOR);
     }
 
     public void update(float delta) {
