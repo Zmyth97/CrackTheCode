@@ -8,6 +8,7 @@ import com.desitum.crackTheCode.screens.MainScreen;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.Random;
 
 /**
@@ -29,7 +30,7 @@ public class GameWorld {
         for (int tilesToDraw = 0; tilesToDraw < tileCount; tilesToDraw++) {
             float locY = (tilesToDraw / 3) * 3.33f + 0.33f;
             float locX = (tilesToDraw % 3) * 3.33f + 0.33f;
-            tiles.add(new Tile(3, locX, locY, Assets.buttonTexture));
+            tiles.add(new Tile(locX, locY, Assets.buttonTexture));
         }
 
         gameOverButtons = new ArrayList<MenuButton>();
@@ -56,7 +57,7 @@ public class GameWorld {
         for (int tilesToDraw = 0; tilesToDraw < tileCount; tilesToDraw++) {
             float locY = (tilesToDraw / 3) * 3.33f + 0.33f;
             float locX = (tilesToDraw % 3) * 3.33f + 0.33f;
-            tiles.add(new Tile(3, locX, locY, Assets.buttonTexture));
+            tiles.add(new Tile(locX, locY, 1, Assets.buttonTexture));
         }
         Collections.shuffle(tiles);
         newActiveTile();
@@ -66,7 +67,12 @@ public class GameWorld {
     public void update(int state, OrthographicCamera cam, float delta) {
         if (state == MainScreen.GAME_RUNNING) {
 
-            for (Tile t : tiles) {
+            Iterator<Tile> iter = tiles.iterator();
+            while (iter.hasNext()){
+                Tile t = iter.next();
+                if (t.isFillingScreen() && t.isDoneFillingScreen()){
+                    iter.remove();
+                }
                 t.update(delta);
                 t.appear();
             }

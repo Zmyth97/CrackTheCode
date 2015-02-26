@@ -1,6 +1,5 @@
 package com.desitum.crackTheCode.objects;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.desitum.crackTheCode.libraries.ColorEffects;
@@ -19,18 +18,21 @@ public class Tile extends Sprite {
     private boolean disabled;
     private boolean fillingScreen;
 
+    private static float SIZE = 3;
+    private static float FILL_SIZE = 30;
+
     private ColorEffects colorChanger;
     private ScaleAnimator appearAnimator;
     private ScaleAnimator fillAnimator;
 
     private float animationDelay;
 
-    public Tile(float size, float locationX, float locationY, Texture texture) {
+    public Tile(float locationX, float locationY, Texture texture) {
         super(texture, 0, 0, texture.getWidth(), texture.getHeight());
 
         this.animationDelay = 0;
         this.setColor(Colors.GAME_CIRCLE);
-        this.setSize(size, size);
+        this.setSize(SIZE, SIZE);
         this.setPosition(locationX, locationY);
         this.scaleAmount = 1;
         this.active = false;
@@ -39,16 +41,16 @@ public class Tile extends Sprite {
 
         setOriginCenter();
 
-        fillAnimator = new ScaleAnimator(1f, 3, 15, Interpolation.ANTICIPATE_INTERPOLATOR);
+        fillAnimator = new ScaleAnimator(1f, SIZE/FILL_SIZE, 1, Interpolation.ACCELERATE_INTERPOLATOR);
         appearAnimator = new ScaleAnimator(0.8f, 0, 1, Interpolation.OVERSHOOT_INTERPOLATOR);
     }
 
-    public Tile(float size, float locationX, float locationY, float animationDelay, Texture texture) {
+    public Tile(float locationX, float locationY, float animationDelay, Texture texture) {
         super(texture, 0, 0, texture.getWidth(), texture.getHeight());
 
         this.animationDelay = animationDelay;
         this.setColor(Colors.GAME_CIRCLE);
-        this.setSize(size, size);
+        this.setSize(SIZE, SIZE);
         this.setPosition(locationX, locationY);
         this.scaleAmount = 1;
         this.active = false;
@@ -57,7 +59,7 @@ public class Tile extends Sprite {
 
         setOriginCenter();
 
-        fillAnimator = new ScaleAnimator(1f, 3.5f/15f , 1, Interpolation.ANTICIPATE_INTERPOLATOR);
+        fillAnimator = new ScaleAnimator(1f, SIZE/FILL_SIZE , 1, Interpolation.ACCELERATE_INTERPOLATOR);
         appearAnimator = new ScaleAnimator(0.8f, 0, 1, Interpolation.OVERSHOOT_INTERPOLATOR);
     }
 
@@ -89,18 +91,29 @@ public class Tile extends Sprite {
 
     public void fillScreen(){
         active = false;
-        colorChanger = new ColorEffects(Colors.GREEN, Color.WHITE, 1);
+        colorChanger = new ColorEffects(Colors.GREEN, Colors.GAME_CIRCLE, 0.9f);
         colorChanger.start();
         fillAnimator.start(false);
-        float previousSize = getWidth();
-        setSize(30, 30);
-        setCenterX(getX() + previousSize/2);
-        setCenterY(getY() + previousSize/2);
+        float previousCenterX = getX() + getWidth()/2;
+        float previousCenterY = getY() + getHeight()/2;
+        setSize(FILL_SIZE, FILL_SIZE);
+        setX(previousCenterX-FILL_SIZE/2);
+        setY(previousCenterY-FILL_SIZE/2);
+        setOriginCenter();
         fillingScreen = true;
     }
 
     public boolean isFillingScreen(){
         return fillingScreen;
+    }
+
+    public boolean isDoneFillingScreen(){
+        if (fillingScreen){
+            if (fillAnimator.didFinish()){
+                return true;
+            }
+        }
+        return false;
     }
 
     public void makeActive() {
@@ -118,6 +131,7 @@ public class Tile extends Sprite {
         if (colorChanger != null) {
             colorChanger.update(delta);
             setColor(colorChanger.getCurrentColor());
+            System.out.println(colorChanger.getCurrentColor());
         }
         if (fillAnimator.isRunning()){
             fillAnimator.update(delta);

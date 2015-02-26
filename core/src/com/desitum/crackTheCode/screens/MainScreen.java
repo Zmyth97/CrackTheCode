@@ -74,6 +74,7 @@ public class MainScreen implements Screen {
         score = 0;
         codesBroken = 0;
         tileCounter = 0;
+        gameTimer = 8;
 
         gpgs = gps;
         cam = new OrthographicCamera(SCREEN_WIDTH * 10, SCREEN_HEIGHT * 10);
@@ -191,6 +192,7 @@ public class MainScreen implements Screen {
                     t.fillScreen(); //Works, but doesn't show thanks to newScreen() overwriting it.
                     tileCounter = 0;
                     codesBroken+=1;
+                    gameTimer += 8;
                     gameWorld.newScreen();
 
                 }
@@ -249,8 +251,8 @@ public class MainScreen implements Screen {
 
     private void updateGameRunning(float delta) {
         gameWorld.update(state, gameRenderer.getCam(), delta);
-        gameTimer += delta;
-        if(gameTimer >= 8){
+        gameTimer -= delta;
+        if(gameTimer <= 0){
             state = GAME_OVER;
             if(GAME_MODE == REGULAR_MODE) {
                 Settings.saveRegularScore(codesBroken);
@@ -361,9 +363,9 @@ public class MainScreen implements Screen {
         spriteBatch.setProjectionMatrix(cam.combined);
 
         if(GAME_MODE == REGULAR_MODE) {
-            float width = Assets.font.getBounds(String.valueOf(codesBroken)).width/2;
-            float height = Assets.font.getBounds("" + codesBroken).height;
-            Assets.font.draw(spriteBatch, String.valueOf(codesBroken), SCREEN_WIDTH * 10 / 2 - width, height);
+            float width = Assets.font.getBounds("HEYO" + String.valueOf(codesBroken)).width/2;
+            float height = Assets.font.getBounds("HEYO" + codesBroken).height;
+            Assets.font.draw(spriteBatch, "HEYO" + String.valueOf(codesBroken), SCREEN_WIDTH * 10 / 2 - width, height);
         } else {
             float width = Assets.font.getBounds(String.valueOf(score)).width/2;
             float height = Assets.font.getBounds("" + score).height;

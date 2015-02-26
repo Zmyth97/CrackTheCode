@@ -11,7 +11,8 @@ public class Colors {
     public static final Color ACTIVE_CIRCLE = new Color(0.992f, 0.231f, 0.251f, 1);
     public static final Color GAME_CIRCLE = new Color(0.173f, 0.635f, 0.702f, 1);
     public static final Color DISABLED_CIRCLE = new Color(0.5f, 0.5f, 0.5f, 1);
-    public static final Color GREEN = new Color(0, 1, 0, 1);
+    public static final Color GREEN = new Color(0.01f, 1f, 0.01f, 1f);
+    public static final Color WHITE = new Color(0.99f, 0.99f, 0.99f, 0.99f);
 
     public static ArrayList<Color> Colors;
 
