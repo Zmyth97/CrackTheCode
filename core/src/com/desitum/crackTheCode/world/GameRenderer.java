@@ -3,6 +3,7 @@ package com.desitum.crackTheCode.world;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.renderers.OrthoCachedTiledMapRenderer;
+import com.desitum.crackTheCode.data.Assets;
 import com.desitum.crackTheCode.objects.Tile;
 import com.desitum.crackTheCode.screens.MainScreen;
 
@@ -29,6 +30,7 @@ public class GameRenderer {
         gameBatch.setProjectionMatrix(gameCam.combined);
 
         for (Tile t : world.tiles) {
+            gameBatch.draw(Assets.shadowTexture, t.getX() + 0.2f, t.getY() -0.4f, t.getWidth() * t.getScaleX(), t.getHeight() * t.getScaleY());
             t.draw(gameBatch);
         }
     }

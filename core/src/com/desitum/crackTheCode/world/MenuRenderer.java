@@ -28,6 +28,7 @@ public class MenuRenderer {
         menuBatch.setProjectionMatrix(menuCamera.combined);
 
         for (MenuButton menuItem : this.world.getMenuButtons()) {
+            menuBatch.draw(Assets.shadowTexture, menuItem.getX() + 0.2f, menuItem.getY() -0.4f, menuItem.getWidth() * menuItem.getScaleX(), menuItem.getHeight() * menuItem.getScaleY());
             menuItem.draw(menuBatch);
         }
 

@@ -19,6 +19,7 @@ public class Assets {
     public static Texture menuTitleTexture;
 
     public static Texture buttonTexture;
+    public static Texture shadowTexture;
 
     public static Sound buttonSound;
     public static BitmapFont font;
@@ -37,6 +38,7 @@ public class Assets {
 
     public static void loadGameTextures() {
         buttonTexture = new Texture(Gdx.files.internal("game/button.png"));
+        shadowTexture = new Texture(Gdx.files.internal("game/shadow.png"));
     }
 
     public static void loadSounds(){
