@@ -9,7 +9,8 @@ import com.badlogic.gdx.Preferences;
 public class Settings {
     public static boolean volumeOn = true;
     public static float volume = 1;
-    public static int highscore;
+    public static int regularHighscore;
+    public static int endlessHighscore;
 
     public static void getSound() {
         Preferences prefs = Gdx.app.getPreferences("settings");
@@ -30,17 +31,28 @@ public class Settings {
     public static void load(){
         Preferences prefs = Gdx.app.getPreferences("settings");
         volumeOn = prefs.getBoolean("soundOn", true);
-        highscore = prefs.getInteger("highscore", 0);
+        regularHighscore = prefs.getInteger("regularHighscore", 0);
+        endlessHighscore = prefs.getInteger("endlessHighscore", 0);
         getSound();
     }
 
-    public static void saveScore(int score) {
-        if (highscore > score){
+    public static void saveRegularScore(int score) {
+        if (regularHighscore > score){
             return;
         }
-        highscore = score;
+        regularHighscore = score;
         Preferences prefs = Gdx.app.getPreferences("settings");
-        prefs.putInteger("highscore", score);
+        prefs.putInteger("regularHighscore", score);
+        prefs.flush();
+    }
+
+    public static void saveEndlessScore(int score) {
+        if (endlessHighscore > score){
+            return;
+        }
+        endlessHighscore = score;
+        Preferences prefs = Gdx.app.getPreferences("settings");
+        prefs.putInteger("endlessHighscore", score);
         prefs.flush();
     }
 }

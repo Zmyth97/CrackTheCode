@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.desitum.crackTheCode.CrackTheCode;
 import com.desitum.crackTheCode.GooglePlayServicesInterface;
 import com.desitum.crackTheCode.data.Assets;
 import com.desitum.crackTheCode.data.Settings;
@@ -29,6 +30,9 @@ public class MainScreen implements Screen {
 
     public static int state = 1;
     public int score;
+    private float gameTimer;
+    public int codesBroken;
+    private int tileCounter;
 
     private Viewport viewport;
 
@@ -68,6 +72,8 @@ public class MainScreen implements Screen {
 
     public MainScreen(GooglePlayServicesInterface gps) {
         score = 0;
+        codesBroken = 0;
+        tileCounter = 0;
 
         gpgs = gps;
         cam = new OrthographicCamera(SCREEN_WIDTH * 10, SCREEN_HEIGHT * 10);
@@ -161,6 +167,7 @@ public class MainScreen implements Screen {
 
     private void onClickGameBefore() {
         state = GAME_RUNNING;
+        gpgs.hideAd();
     }
 
     private void onClickGamePaused() {
@@ -173,12 +180,22 @@ public class MainScreen implements Screen {
             if (CollisionDetection.pointInRectangle(t.getBoundingRectangle(), touchPoint)) {
                 if (t.isActive()) {
                     score += 1;
+                    System.out.println("Score: " + score);
+                    tileCounter += 1;
                     t.fadeBack();
                     Assets.buttonSound.play(Settings.volume);
                     gameWorld.newActiveTile();
                 }
-                if (score == 16) {
+                else{
                     state = GAME_OVER;
+                }
+                if (tileCounter == 12 && GAME_MODE == REGULAR_MODE) {
+                    t.fillScreen(); //Works, but doesn't show thanks to newScreen() overwriting it.
+                    tileCounter = 0;
+                    codesBroken+=1;
+                    System.out.println("CodesBroken: " + codesBroken);
+                    gameWorld.newScreen();
+
                 }
             }
         }
@@ -235,6 +252,50 @@ public class MainScreen implements Screen {
 
     private void updateGameRunning(float delta) {
         gameWorld.update(state, gameRenderer.getCam(), delta);
+        gameTimer += delta;
+        System.out.println("GameTimer: " + gameTimer);
+        if(gameTimer >= 8){
+            state = GAME_OVER;
+            if(GAME_MODE == REGULAR_MODE) {
+                Settings.saveRegularScore(codesBroken);
+                gpgs.submitScore(Settings.regularHighscore);
+                if(Settings.regularHighscore >= 1){
+                    gpgs.unlockAchievement(CrackTheCode.FIRST_CODE);
+                }
+                if(Settings.regularHighscore >= 10){
+                    gpgs.unlockAchievement(CrackTheCode.CODE_NOVICE);
+                }
+                if(Settings.regularHighscore >= 25){
+                    gpgs.unlockAchievement(CrackTheCode.CODE_EXPERT);
+                }
+                if(Settings.regularHighscore >= 50){
+                    gpgs.unlockAchievement(CrackTheCode.CODE_MASTER);
+                }
+                if(Settings.regularHighscore >= 100){
+                    gpgs.unlockAchievement(CrackTheCode.CODE_LEGEND);
+                }
+
+            }else {
+                Settings.saveEndlessScore(score);
+                gpgs.submitScore(Settings.endlessHighscore);
+                if(Settings.endlessHighscore >= 20){
+                    gpgs.unlockAchievement(CrackTheCode.ENDLESS_BEGINNER);
+                }
+                if(Settings.endlessHighscore >= 100){
+                    gpgs.unlockAchievement(CrackTheCode.ENDLESS_NOVICE);
+                }
+                if(Settings.endlessHighscore >= 250){
+                    gpgs.unlockAchievement(CrackTheCode.ENDLESS_EXPERT);
+                }
+                if(Settings.endlessHighscore >= 500){
+                    gpgs.unlockAchievement(CrackTheCode.ENDLESS_MASTER);
+                }
+                if(Settings.endlessHighscore >= 1000){
+                    gpgs.unlockAchievement(CrackTheCode.ENDLESS_LEGEND);
+                }
+            }
+            gpgs.showAd();
+        }
     }
 
     private void updateGamePaused(float delta) {
@@ -302,12 +363,45 @@ public class MainScreen implements Screen {
     private void drawGameRunning() {
         gameRenderer.render();
         spriteBatch.setProjectionMatrix(cam.combined);
+
+        if(GAME_MODE == REGULAR_MODE) {
+            float width = Assets.font.getBounds(String.valueOf(codesBroken)).width/2;
+            float height = Assets.font.getBounds("" + codesBroken).height;
+            Assets.font.draw(spriteBatch, String.valueOf(codesBroken), SCREEN_WIDTH * 10 / 2 - width, height);
+        } else {
+            float width = Assets.font.getBounds(String.valueOf(score)).width/2;
+            float height = Assets.font.getBounds("" + score).height;
+            Assets.font.draw(spriteBatch, String.valueOf(score), SCREEN_WIDTH * 10 / 2 - width, height);
+        }
     }
 
     private void drawGameOver() {
         gameRenderer.render();
         spriteBatch.setProjectionMatrix(cam.combined);
 
+        if(GAME_MODE == REGULAR_MODE) {
+            Assets.font.setScale(0.1f);
+            float width = Assets.font.getBounds("Highscore: " + Settings.regularHighscore).width / 2;
+            float height = Assets.font.getBounds("Highscore" + Settings.regularHighscore).height;
+            Assets.font.draw(spriteBatch, "Highscore: " + Settings.regularHighscore, SCREEN_WIDTH * 10 / 2 - width, 10 * 10 + height);
+            Assets.font.setScale(0.25f);
+        } else {
+            Assets.font.setScale(0.1f);
+            float width = Assets.font.getBounds("Highscore: " + Settings.endlessHighscore).width / 2;
+            float height = Assets.font.getBounds("Highscore" + Settings.endlessHighscore).height;
+            Assets.font.draw(spriteBatch, "Highscore: " + Settings.endlessHighscore, SCREEN_WIDTH * 10 / 2 - width, 10 * 10 + height);
+            Assets.font.setScale(0.25f);
+        }
+
+        if(GAME_MODE == REGULAR_MODE) {
+            float width = Assets.font.getBounds(String.valueOf(codesBroken)).width/2;
+            float height = Assets.font.getBounds("" + codesBroken).height;
+            Assets.font.draw(spriteBatch, String.valueOf(codesBroken), SCREEN_WIDTH * 10 / 2 - width, 8 * 10 + height);
+        } else {
+            float width = Assets.font.getBounds(String.valueOf(score)).width/2;
+            float height = Assets.font.getBounds("" + score).height;
+            Assets.font.draw(spriteBatch, String.valueOf(score), SCREEN_WIDTH * 10 / 2 - width, 8 * 10 + height);
+        }
     }
 
     private void resetGame() {

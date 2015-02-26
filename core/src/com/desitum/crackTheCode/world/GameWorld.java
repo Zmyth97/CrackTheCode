@@ -20,8 +20,10 @@ public class GameWorld {
     ArrayList<MenuButton> gameOverButtons;
     private int tileCount;
 
+
     public GameWorld() {
         tileCount = 12;
+
 
         tiles = new ArrayList<Tile>();
         for (int tilesToDraw = 0; tilesToDraw < tileCount; tilesToDraw++) {
@@ -43,10 +45,23 @@ public class GameWorld {
 
     }
 
+    public void newScreen(){
+        tiles = new ArrayList<Tile>();
+        for (int tilesToDraw = 0; tilesToDraw < tileCount; tilesToDraw++) {
+            float locY = (tilesToDraw / 3) * 3.33f + 0.33f;
+            float locX = (tilesToDraw % 3) * 3.33f + 0.33f;
+            tiles.add(new Tile(3, locX, locY, Assets.buttonTexture));
+        }
+        Collections.shuffle(tiles);
+        newActiveTile();
+    }
+
     public void update(int state, OrthographicCamera cam, float delta) {
         if (state == MainScreen.GAME_RUNNING) {
+
             for (Tile t : tiles) {
                 t.update(delta);
+                t.appear();
             }
         } else if (state == MainScreen.GAME_OVER) {
             for (MenuButton mb : gameOverButtons) {

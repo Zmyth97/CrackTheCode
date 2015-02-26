@@ -4,6 +4,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.desitum.crackTheCode.libraries.ColorEffects;
 import com.desitum.crackTheCode.libraries.Colors;
+import com.desitum.crackTheCode.libraries.animation.ScaleAnimator;
+import com.desitum.crackTheCode.libraries.interpolation.Interpolation;
 import com.desitum.crackTheCode.screens.MainScreen;
 
 /**
@@ -15,13 +17,12 @@ public class Tile extends Sprite {
     private boolean active;
     private boolean disabled;
 
-    private float tilePositionX;
-    private float tilePositionY;
-
     private ColorEffects colorChanger;
+    private ScaleAnimator appearAnimator;
 
     public Tile(float size, float locationX, float locationY, Texture texture) {
         super(texture, 0, 0, texture.getWidth(), texture.getHeight());
+
 
         this.setColor(Colors.GAME_CIRCLE);
         this.setSize(size, size);
@@ -30,7 +31,13 @@ public class Tile extends Sprite {
         this.active = false;
         this.disabled = false;
 
+        setOriginCenter();
 
+        appearAnimator = new ScaleAnimator(0.8f, 0, 1, Interpolation.OVERSHOOT_INTERPOLATOR);
+    }
+
+    public void appear(){
+        appearAnimator.start(true);
     }
 
     public boolean isActive() {
@@ -55,6 +62,12 @@ public class Tile extends Sprite {
         }
     }
 
+    public void fillScreen(){
+        active = false;
+        colorChanger = new ColorEffects(Colors.ACTIVE_CIRCLE, Colors.GREEN, 1);
+        appearAnimator = new ScaleAnimator(2.8f, 3, 15, Interpolation.BOUNCE_INTERPOLATOR);
+    }
+
     public void makeActive() {
         active = true;
         colorChanger = new ColorEffects(Colors.GAME_CIRCLE, Colors.ACTIVE_CIRCLE, 0.2f);
@@ -67,6 +80,8 @@ public class Tile extends Sprite {
             colorChanger.update(delta);
             setColor(colorChanger.getCurrentColor());
         }
+        appearAnimator.update(delta);
+        setScale(appearAnimator.getScaleSize());
     }
 
 }

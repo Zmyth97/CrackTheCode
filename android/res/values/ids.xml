@@ -15,5 +15,6 @@ Save this file as res/values/games-ids.xml in your project.
     <string name="achievement_endless_expert">CgkIoOnTp_EOEAIQCQ</string>
     <string name="achievement_endless_master">CgkIoOnTp_EOEAIQCg</string>
     <string name="achievement_endless_legend">CgkIoOnTp_EOEAIQCw</string>
-    <string name="leaderboard_highscore">CgkIoOnTp_EOEAIQAA</string>
+    <string name="leaderboard_regular_highscore">CgkIoOnTp_EOEAIQAA</string>
+    <string name="leaderboard_endless_highscore">CgkIoOnTp_EOEAIQDA</string>
 </resources>
