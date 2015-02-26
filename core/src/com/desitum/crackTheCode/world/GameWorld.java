@@ -59,8 +59,8 @@ public class GameWorld {
             tiles.add(new Tile(3, locX, locY, Assets.buttonTexture));
         }
         Collections.shuffle(tiles);
-        if (tileToAdd != null) tiles.add(tileToAdd);
         newActiveTile();
+        if (tileToAdd != null) tiles.add(tileToAdd);
     }
 
     public void update(int state, OrthographicCamera cam, float delta) {

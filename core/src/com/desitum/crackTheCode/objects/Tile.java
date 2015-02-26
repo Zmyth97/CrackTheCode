@@ -93,7 +93,7 @@ public class Tile extends Sprite {
         colorChanger.start();
         fillAnimator.start(false);
         float previousSize = getWidth();
-        setSize(15, 15);
+        setSize(30, 30);
         setCenterX(getX() + previousSize/2);
         setCenterY(getY() + previousSize/2);
         fillingScreen = true;
@@ -119,10 +119,11 @@ public class Tile extends Sprite {
             colorChanger.update(delta);
             setColor(colorChanger.getCurrentColor());
         }
-        appearAnimator.update(delta);
-        fillAnimator.update(delta);
-        setScale(appearAnimator.getScaleSize());
         if (fillAnimator.isRunning()){
+            fillAnimator.update(delta);
+            setScale(fillAnimator.getScaleSize());
+        } else {
+            appearAnimator.update(delta);
             setScale(appearAnimator.getScaleSize());
         }
     }
