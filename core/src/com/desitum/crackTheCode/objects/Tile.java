@@ -118,8 +118,8 @@ public class Tile extends Sprite {
 
     public void makeActive() {
         active = true;
-        colorChanger = new ColorEffects(Colors.GAME_CIRCLE, Colors.ACTIVE_CIRCLE, 0.2f);
-        colorChanger.start();
+        colorChanger = null;
+        setColor(Colors.ACTIVE_CIRCLE);
 
     }
 

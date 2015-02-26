@@ -52,7 +52,7 @@ public class ColorEffects {
 
         slopeRed = (endColor.r - startColor.r);
         slopeGreen = (endColor.g - startColor.g);
-        slopeRed = (endColor.b - startColor.b);
+        slopeBlue = (endColor.b - startColor.b);
 
         currentRed = startColor.r;
         currentGreen = startColor.g;
@@ -64,7 +64,7 @@ public class ColorEffects {
     }
 
     public void start() {
-        if (currentRed == endRed && currentGreen == endGreen && currentBlue == endBlue) return;
+        //if (currentRed == endRed && currentGreen == endGreen && currentBlue == endBlue) return;
         transforming = true;
     }
 
@@ -76,7 +76,7 @@ public class ColorEffects {
             currentGreen = slopeGreen * pointInTransition + startGreen;
             currentBlue = slopeBlue * pointInTransition + startBlue;
 
-            if (pointInTransition >= duration) {
+            if (pointInTransition >= 1) {
                 transforming = false;
 
                 currentRed = endRed;
