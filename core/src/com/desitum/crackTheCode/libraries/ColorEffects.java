@@ -29,7 +29,6 @@ public class ColorEffects {
 
     public ColorEffects(Color startColor, Color endColor, float duration) {
         transforming = false;
-        this.duration = duration;
 
         if (duration <= 0) {
             currentRed = endColor.r;
@@ -44,13 +43,16 @@ public class ColorEffects {
             return;
         }
 
+
+        this.duration = duration;
+
         startRed = startColor.r;
         startGreen = startColor.g;
         startBlue = startColor.b;
 
-        slopeRed = (endColor.r - startColor.r) / (duration - 0);
-        slopeGreen = (endColor.g - startColor.g) / (duration - 0);
-        slopeRed = (endColor.g - startColor.g) / (duration - 0);
+        slopeRed = (endColor.r - startColor.r);
+        slopeGreen = (endColor.g - startColor.g);
+        slopeRed = (endColor.b - startColor.b);
 
         currentRed = startColor.r;
         currentGreen = startColor.g;
@@ -62,6 +64,7 @@ public class ColorEffects {
     }
 
     public void start() {
+        if (currentRed == endRed && currentGreen == endGreen && currentBlue == endBlue) return;
         transforming = true;
     }
 
