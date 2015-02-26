@@ -83,7 +83,7 @@ public class MainScreen implements Screen {
 
         //the viewport object will handle camera's attributes
         //the aspect provided (worldWidth/worldHeight) will be kept
-        viewport = new FitViewport(SCREEN_WIDTH, SCREEN_HEIGHT, cam);
+        viewport = new FitViewport(SCREEN_WIDTH*10, SCREEN_HEIGHT*10, cam);
 
         spriteBatch = new SpriteBatch();
 
@@ -365,11 +365,11 @@ public class MainScreen implements Screen {
         if(GAME_MODE == REGULAR_MODE) {
             float width = Assets.font.getBounds("f" + String.valueOf(codesBroken)).width/2;
             float height = Assets.font.getBounds("f" + codesBroken).height;
-            Assets.font.draw(spriteBatch, "f" + String.valueOf(codesBroken), SCREEN_WIDTH / 2 - width, 10  + height);
+            Assets.font.draw(spriteBatch, "f" + String.valueOf(codesBroken), SCREEN_WIDTH * 10 / 2 - width, SCREEN_HEIGHT*10);
         } else {
             float width = Assets.font.getBounds(String.valueOf(score)).width/2;
             float height = Assets.font.getBounds("" + score).height;
-            Assets.font.draw(spriteBatch, String.valueOf(score), SCREEN_WIDTH * 10 / 2 - width, height);
+            Assets.font.draw(spriteBatch, String.valueOf(score), SCREEN_WIDTH * 10 / 2 - width, SCREEN_HEIGHT*10);
         }
     }
 
@@ -378,23 +378,19 @@ public class MainScreen implements Screen {
         spriteBatch.setProjectionMatrix(cam.combined);
 
         if(GAME_MODE == REGULAR_MODE) {
-            Assets.font.setScale(0.010f);
             float width = Assets.font.getBounds("000 : " + Settings.regularHighscore).width / 2;
             float height = Assets.font.getBounds("000 : " + Settings.regularHighscore).height;
-            Assets.font.draw(spriteBatch, "000 : " + Settings.regularHighscore, SCREEN_WIDTH / 2 - width, 12  + height);
-            Assets.font.setScale(0.010f);
+            Assets.font.draw(spriteBatch, "000 : " + Settings.regularHighscore, SCREEN_WIDTH * 10 / 2 - width, SCREEN_HEIGHT);
         } else {
-            Assets.font.setScale(0.1f);
             float width = Assets.font.getBounds("Highscore: " + Settings.endlessHighscore).width / 2;
             float height = Assets.font.getBounds("Highscore" + Settings.endlessHighscore).height;
-            Assets.font.draw(spriteBatch, "Highscore: " + Settings.endlessHighscore, SCREEN_WIDTH * 10 / 2 - width, 10 * 10 + height);
-            Assets.font.setScale(0.25f);
+            Assets.font.draw(spriteBatch, "Highscore: " + Settings.endlessHighscore, SCREEN_WIDTH * 10 / 2 - width, SCREEN_HEIGHT);
         }
 
         if(GAME_MODE == REGULAR_MODE) {
             float width = Assets.font.getBounds(String.valueOf(codesBroken)).width/2;
             float height = Assets.font.getBounds("" + codesBroken).height;
-            Assets.font.draw(spriteBatch, String.valueOf(codesBroken), SCREEN_WIDTH * 10 - width, 8 * 10 + height);
+            Assets.font.draw(spriteBatch, String.valueOf(codesBroken), SCREEN_WIDTH * 10 / 2 - width, 8 * 10 + height);
         } else {
             float width = Assets.font.getBounds(String.valueOf(score)).width/2;
             float height = Assets.font.getBounds("" + score).height;
