@@ -207,15 +207,22 @@ public class MainScreen implements Screen {
                     gameWorld.newActiveTile();
                 }
                 else{
+                    if(t.isFillingScreen()){
+                        return;
+                    }
                     needToEndGame = true;
                 }
                 if (tileCounter == 12 && GAME_MODE == REGULAR_MODE) {
                     t.fillScreen();
+                    Assets.shatter.play(Settings.volume);
                     tileCounter = 0;
                     codesBroken+=1;
                     gameTimer = 7;
                     gameWorld.newScreen();
-                    gpgs.hideAd();
+                }
+                else if(tileCounter == 12 && GAME_MODE == ENDLESS_MODE){
+                    gameTimer = 7;
+                    tileCounter = 0;
                 }
             }
         }
@@ -277,6 +284,7 @@ public class MainScreen implements Screen {
 
     private void updateGameRunning(float delta) {
         gameWorld.update(state, gameRenderer.getCam(), delta);
+        gpgs.hideAd();
         gameTimer -= delta;
         if(gameTimer <= 0){
             endGame();
@@ -353,8 +361,12 @@ public class MainScreen implements Screen {
 
         spriteBatch.draw(Assets.timerTexture, 0, SCREEN_HEIGHT * 10 -10, 10, 10);
         float wide = Assets.font.getBounds("" + String.valueOf(((int) gameTimer + 1))).width/2;
-        if(gameTimer <= 4){
+        if(gameTimer <= 4 && GAME_MODE == REGULAR_MODE){
             Assets.font.setColor(Colors.ACTIVE_CIRCLE);
+        }  else if(gameTimer <= 4 && GAME_MODE == ENDLESS_MODE){
+            Assets.font.setColor(Colors.ACTIVE_CIRCLE);
+        }else{
+            Assets.font.setColor(Color.BLACK);
         }
         Assets.font.draw(spriteBatch, "" + String.valueOf(((int) gameTimer + 1)), SCREEN_WIDTH * 10 /6 - wide, SCREEN_HEIGHT*10);
 
@@ -364,6 +376,7 @@ public class MainScreen implements Screen {
             float width = Assets.font.getBounds("" + String.valueOf(codesBroken)).width/2;
             Assets.font.draw(spriteBatch, "" + String.valueOf(codesBroken), SCREEN_WIDTH * 10 / 2 - width, SCREEN_HEIGHT*10);
         } else {
+            Assets.font.setColor(Color.BLACK);
             float width = Assets.font.getBounds(String.valueOf(score)).width/2;
             Assets.font.draw(spriteBatch, String.valueOf(score), SCREEN_WIDTH * 10 / 2 - width, SCREEN_HEIGHT*10);
         }
@@ -396,6 +409,7 @@ public class MainScreen implements Screen {
 
     public void endGame(){
         gameWorld.putActiveLast();
+        Assets.endGame.play(Settings.volume);
         state = GAME_OVER;
         if(GAME_MODE == REGULAR_MODE) {
             Settings.saveRegularScore(codesBroken);
