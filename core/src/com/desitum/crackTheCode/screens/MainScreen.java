@@ -463,6 +463,7 @@ public class MainScreen implements Screen {
         codesBroken = 0;
         tileCounter = 0;
         gameTimer = 8;
+        menuWorld.reset();
         gameWorld.reset();
     }
 

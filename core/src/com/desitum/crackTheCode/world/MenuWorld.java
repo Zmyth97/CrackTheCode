@@ -63,6 +63,11 @@ public class MenuWorld {
         }
     }
 
+    public void reset(){
+        menuButtons = new ArrayList<MenuButton>();
+        createButtons();
+    }
+
     public void leaderBoardAnim(){
         scoreButton.disappear();
         scoreRegularButton.appear();
