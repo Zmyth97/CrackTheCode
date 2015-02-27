@@ -204,10 +204,14 @@ public class MainScreen implements Screen {
                     gameWorld.newActiveTile();
                 }
                 else{
+                    if(t.isFillingScreen()){
+                        return;
+                    }
                     needToEndGame = true;
                 }
                 if (tileCounter == 12 && GAME_MODE == REGULAR_MODE) {
                     t.fillScreen();
+                    Assets.shatter.play(Settings.volume);
                     tileCounter = 0;
                     codesBroken+=1;
                     gameTimer = 7;
@@ -402,6 +406,7 @@ public class MainScreen implements Screen {
 
     public void endGame(){
         gameWorld.putActiveLast();
+        Assets.endGame.play(Settings.volume);
         state = GAME_OVER;
         if(GAME_MODE == REGULAR_MODE) {
             Settings.saveRegularScore(codesBroken);
