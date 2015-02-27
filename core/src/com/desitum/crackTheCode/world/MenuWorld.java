@@ -37,11 +37,11 @@ public class MenuWorld {
         scoreButton.appear();
         soundButton = new MenuButton(MainScreen.SOUND, 0.15f, 1, 1, Assets.soundButtonOnTexture);
         soundButton.appear();
-        scoreRegularButton = new MenuButton(MainScreen.SCORE_REG, 5.5f, 2.5f, Assets.playButtonTexture);
+        scoreRegularButton = new MenuButton(MainScreen.SCORE_REG, 0.2f, 5.5f, 2f, Assets.playButtonTexture);
         scoreRegularButton.setSize(1.5f, 1.5f);
         scoreRegularButton.setScale(0);
         scoreRegularButton.setOriginCenter();
-        scoreEndlessButton = new MenuButton(MainScreen.SCORE_END, 5.5f + MenuButton.SIZE_X - 1.5f, 2.5f, Assets.endlessButtonTexture);
+        scoreEndlessButton = new MenuButton(MainScreen.SCORE_END, 0.2f, 5.5f + MenuButton.SIZE_X - 1.5f, 2f, Assets.endlessButtonTexture);
         scoreEndlessButton.setSize(1.5f, 1.5f);
         scoreEndlessButton.setScale(0);
         scoreEndlessButton.setOriginCenter();
@@ -51,6 +51,8 @@ public class MenuWorld {
         menuButtons.add(endlessButton);
         menuButtons.add(scoreButton);
         menuButtons.add(soundButton);
+        menuButtons.add(scoreRegularButton);
+        menuButtons.add(scoreEndlessButton);
 
         playButton.appear();
     }
