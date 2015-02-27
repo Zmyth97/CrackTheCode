@@ -21,6 +21,8 @@ public class ScaleAnimator implements Animator {
     private float scaleSize;
 
     private float timeInAnimation;
+    private float animationDelay;
+    private float currentDelay;
 
     private boolean running;
     private boolean ran;
@@ -34,6 +36,26 @@ public class ScaleAnimator implements Animator {
         this.endScale = endScale;
 
         timeInAnimation = 0;
+        currentDelay = 0;
+        animationDelay = 0;
+
+        if (startScale > endScale){
+            growing = false;
+        } else {
+            growing = true;
+        }
+
+        setupInterpolator(interpolator);
+    }
+
+    public ScaleAnimator(float duration, float delay, float startScale, float endScale, int interpolator){
+        this.duration = duration;
+        this.startScale = startScale;
+        this.endScale = endScale;
+
+        timeInAnimation = 0;
+        currentDelay = 0;
+        animationDelay = delay;
 
         if (startScale > endScale){
             growing = false;
@@ -47,6 +69,10 @@ public class ScaleAnimator implements Animator {
     @Override
     public void update(float delta){
         if (!running){
+            return;
+        }
+        if (currentDelay < animationDelay){
+            currentDelay += delta;
             return;
         }
 

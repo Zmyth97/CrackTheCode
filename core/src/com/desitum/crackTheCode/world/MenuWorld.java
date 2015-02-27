@@ -18,6 +18,8 @@ public class MenuWorld {
     private MenuButton endlessButton;
     private MenuButton scoreButton;
     private MenuButton soundButton;
+    private MenuButton scoreRegularButton;
+    private MenuButton scoreEndlessButton;
 
     public MenuWorld() {
         menuButtons = new ArrayList<MenuButton>();
@@ -28,9 +30,21 @@ public class MenuWorld {
     private void createButtons() {
         //Create the buttons!
         playButton = new MenuButton(MainScreen.PLAY, 1, 5.5f, Assets.playButtonTexture);
-        endlessButton = new MenuButton(MainScreen.ENDLESS, 5.5f, 5.5f, Assets.endlessButtonTexture);
-        scoreButton = new MenuButton(MainScreen.SCORE, 5.5f, 1, Assets.scoreButtonTexture);
-        soundButton = new MenuButton(MainScreen.SOUND, 1, 1, Assets.soundButtonOnTexture);
+        playButton.appear();
+        endlessButton = new MenuButton(MainScreen.ENDLESS, 0.15f, 5.5f, 5.5f, Assets.endlessButtonTexture);
+        endlessButton.appear();
+        scoreButton = new MenuButton(MainScreen.SCORE, 0.3f, 5.5f, 1, Assets.scoreButtonTexture);
+        scoreButton.appear();
+        soundButton = new MenuButton(MainScreen.SOUND, 0.15f, 1, 1, Assets.soundButtonOnTexture);
+        soundButton.appear();
+        scoreRegularButton = new MenuButton(MainScreen.SCORE_REG, 5.5f, 2.5f, Assets.playButtonTexture);
+        scoreRegularButton.setSize(1.5f, 1.5f);
+        scoreRegularButton.setScale(0);
+        scoreRegularButton.setOriginCenter();
+        scoreEndlessButton = new MenuButton(MainScreen.SCORE_END, 5.5f + MenuButton.SIZE_X - 1.5f, 2.5f, Assets.endlessButtonTexture);
+        scoreEndlessButton.setSize(1.5f, 1.5f);
+        scoreEndlessButton.setScale(0);
+        scoreEndlessButton.setOriginCenter();
 
         //Add the buttons to the ArrayList
         menuButtons.add(playButton);
@@ -42,17 +56,15 @@ public class MenuWorld {
     }
 
     public void update(float delta) {
-        loadTiming += delta;
-        if (loadTiming > 0.15f){
-            soundButton.appear();
-            endlessButton.appear();
-        }
-        if (loadTiming > 0.3f){
-            scoreButton.appear();
-        }
         for (MenuButton mb : menuButtons) {
             mb.update(delta);
         }
+    }
+
+    public void leaderBoardAnim(){
+        scoreButton.disappear();
+        scoreRegularButton.appear();
+        scoreEndlessButton.appear();
     }
 
     public ArrayList<MenuButton> getMenuButtons() {

@@ -29,8 +29,8 @@ public class Assets {
         playButtonTexture = new Texture(Gdx.files.internal("menu/playButton.png"));
         endlessButtonTexture = new Texture(Gdx.files.internal("menu/endlessButton.png"));
         scoreButtonTexture = new Texture(Gdx.files.internal("menu/scoreButton.png"));
-        soundButtonOffTexture = new Texture(Gdx.files.internal("menu/soundButtonOff.png"));
-        soundButtonOnTexture = new Texture(Gdx.files.internal("menu/soundButtonOn.png"));
+        soundButtonOffTexture = new Texture(Gdx.files.internal("menu/volumeOffButton.png"));
+        soundButtonOnTexture = new Texture(Gdx.files.internal("menu/volumeOnButton.png"));
         menuTitleTexture = new Texture(Gdx.files.internal("menu/menuTitle.png"));
         font = new BitmapFont(Gdx.files.internal("font/cartoon.fnt"), Gdx.files.internal("font/cartoon.png"), false);
         font.setScale(0.15f);

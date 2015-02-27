@@ -17,6 +17,7 @@ public class MenuButton extends Sprite {
     private float time = 0;
 
     private ScaleAnimator appearAnimator;
+    private ScaleAnimator disappearAnimator;
 
     public MenuButton(String command, float locationX, float locationY, Texture texture) {
         super(texture, 0, 0, texture.getWidth(), texture.getHeight());
@@ -26,11 +27,28 @@ public class MenuButton extends Sprite {
         setOriginCenter();
 
         appearAnimator = new ScaleAnimator(0.8f, 0, 1, Interpolation.OVERSHOOT_INTERPOLATOR);
+        disappearAnimator = new ScaleAnimator(0.8f, 1, 0, Interpolation.ANTICIPATE_INTERPOLATOR);
+    }
+
+    public MenuButton(String command, float delay, float locationX, float locationY, Texture texture) {
+        super(texture, 0, 0, texture.getWidth(), texture.getHeight());
+        this.command = command;
+        this.setPosition(locationX, locationY);
+        this.setSize(SIZE_X, SIZE_Y);
+        setOriginCenter();
+
+        appearAnimator = new ScaleAnimator(0.8f, delay, 0, 1, Interpolation.OVERSHOOT_INTERPOLATOR);
+        disappearAnimator = new ScaleAnimator(0.8f, 1, 0, Interpolation.ANTICIPATE_INTERPOLATOR);
     }
 
     public void update(float delta) {
-        appearAnimator.update(delta);
-        setScale(appearAnimator.getScaleSize());
+        if (appearAnimator.isRunning()){
+            appearAnimator.update(delta);
+            setScale(appearAnimator.getScaleSize());
+        } if (disappearAnimator.isRunning()){
+            disappearAnimator.update(delta);
+            setScale(disappearAnimator.getScaleSize());
+        }
     }
 
     public void onClick() {
@@ -38,6 +56,10 @@ public class MenuButton extends Sprite {
 
     public void appear(){
         appearAnimator.start(true);
+    }
+
+    public void disappear(){
+        disappearAnimator.start(true);
     }
 
     public String getCommand() {

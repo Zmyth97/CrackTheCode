@@ -57,6 +57,8 @@ public class MainScreen implements Screen {
     public static String SCORE = "open_scores";
     public static String SOUND = "sound";
     public static String SHARE = "share";
+    public static String SCORE_REG = "score_regular";
+    public static String SCORE_END = "score_endless";
 
     private OrthographicCamera cam;
     private OrthographicCamera textCam;
@@ -168,7 +170,8 @@ public class MainScreen implements Screen {
                     GAME_MODE = ENDLESS_MODE;
                 } else if (mb.getCommand().equals(SCORE)) { // If the button was high scores
                     Assets.buttonSound.play(Settings.volume);
-                    //Leaderboards!
+                    mb.disappear();
+                    menuWorld.leaderBoardAnim();
                 } else if (mb.getCommand().equals(SOUND)) { // If the button was sound
                     Settings.volumeOn = !Settings.volumeOn; // toggle whether the volume is on
                     Settings.getSound(); //Gets the Sound (if volume is on)
