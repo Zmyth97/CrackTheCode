@@ -2,6 +2,7 @@ package com.desitum.crackTheCode.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -13,6 +14,7 @@ import com.desitum.crackTheCode.GooglePlayServicesInterface;
 import com.desitum.crackTheCode.data.Assets;
 import com.desitum.crackTheCode.data.Settings;
 import com.desitum.crackTheCode.libraries.CollisionDetection;
+import com.desitum.crackTheCode.libraries.Colors;
 import com.desitum.crackTheCode.objects.MenuButton;
 import com.desitum.crackTheCode.objects.Tile;
 import com.desitum.crackTheCode.world.GameRenderer;
@@ -148,16 +150,21 @@ public class MainScreen implements Screen {
                 mb.onClick();
                 if (mb.getCommand().equals(PLAY)) { // If the button was play
                     state = GAME_RUNNING;
+                    Assets.buttonSound.play(Settings.volume);
                     GAME_MODE = REGULAR_MODE;
                 } else if (mb.getCommand().equals(ENDLESS)) { // If the button was Endless Mode
                     state = GAME_RUNNING;
+                    Assets.buttonSound.play(Settings.volume);
                     GAME_MODE = ENDLESS_MODE;
                 } else if (mb.getCommand().equals(SCORE)) { // If the button was high scores
-
+                    Assets.buttonSound.play(Settings.volume);
+                    //Leaderboards!
                 } else if (mb.getCommand().equals(SOUND)) { // If the button was sound
                     Settings.volumeOn = !Settings.volumeOn; // toggle whether the volume is on
+                    Settings.getSound(); //Gets the Sound (if volume is on)
                     if (Settings.volumeOn) { // update the texture for the Sound Button
                         mb.setTexture(Assets.soundButtonOnTexture); //No sound on texture yet!
+                        Assets.buttonSound.play(Settings.volume);
                     } else {
                         mb.setTexture(Assets.soundButtonOffTexture); //No sound off texture yet!
                     }
@@ -182,19 +189,19 @@ public class MainScreen implements Screen {
                     score += 1;
                     tileCounter += 1;
                     t.fadeBack();
-                    Assets.buttonSound.play(Settings.volume);
+                    Assets.buttonSound.play(Settings.volume * 2);
                     gameWorld.newActiveTile();
                 }
                 else{
                     state = GAME_OVER;
                 }
                 if (tileCounter == 12 && GAME_MODE == REGULAR_MODE) {
-                    t.fillScreen(); //Works, but doesn't show thanks to newScreen() overwriting it.
+                    t.fillScreen();
                     tileCounter = 0;
                     codesBroken+=1;
-                    gameTimer += 8;
+                    gameTimer = 9;
                     gameWorld.newScreen();
-
+                    gpgs.hideAd();
                 }
             }
         }
@@ -292,7 +299,6 @@ public class MainScreen implements Screen {
                     gpgs.unlockAchievement(CrackTheCode.ENDLESS_LEGEND);
                 }
             }
-            gpgs.showAd();
         }
     }
 
@@ -362,13 +368,19 @@ public class MainScreen implements Screen {
         gameRenderer.render();
         spriteBatch.setProjectionMatrix(cam.combined);
 
+        float wide = Assets.font.getBounds("" + String.valueOf(((int) gameTimer))).width/2;
+        if(gameTimer <= 4){
+            Assets.font.setColor(Colors.ACTIVE_CIRCLE);
+        }
+        Assets.font.draw(spriteBatch, "" + String.valueOf(((int) gameTimer)), SCREEN_WIDTH * 10 /6 - wide, SCREEN_HEIGHT*10);
+
+
         if(GAME_MODE == REGULAR_MODE) {
-            float width = Assets.font.getBounds("f" + String.valueOf(codesBroken)).width/2;
-            float height = Assets.font.getBounds("f" + codesBroken).height;
-            Assets.font.draw(spriteBatch, "f" + String.valueOf(codesBroken), SCREEN_WIDTH * 10 / 2 - width, SCREEN_HEIGHT*10);
+            Assets.font.setColor(Color.BLACK);
+            float width = Assets.font.getBounds("" + String.valueOf(codesBroken)).width/2;
+            Assets.font.draw(spriteBatch, "" + String.valueOf(codesBroken), SCREEN_WIDTH * 10 / 2 - width, SCREEN_HEIGHT*10);
         } else {
             float width = Assets.font.getBounds(String.valueOf(score)).width/2;
-            float height = Assets.font.getBounds("" + score).height;
             Assets.font.draw(spriteBatch, String.valueOf(score), SCREEN_WIDTH * 10 / 2 - width, SCREEN_HEIGHT*10);
         }
     }
@@ -378,24 +390,23 @@ public class MainScreen implements Screen {
         spriteBatch.setProjectionMatrix(cam.combined);
 
         if(GAME_MODE == REGULAR_MODE) {
-            float width = Assets.font.getBounds("000 : " + Settings.regularHighscore).width / 2;
-            float height = Assets.font.getBounds("000 : " + Settings.regularHighscore).height;
-            Assets.font.draw(spriteBatch, "000 : " + Settings.regularHighscore, SCREEN_WIDTH * 10 / 2 - width, SCREEN_HEIGHT);
+            float width = Assets.font.getBounds("Highscore: " + Settings.regularHighscore).width / 2;
+            Assets.font.draw(spriteBatch, "Highscore: " + Settings.regularHighscore, SCREEN_WIDTH * 10 / 2 - width, SCREEN_HEIGHT);
         } else {
             float width = Assets.font.getBounds("Highscore: " + Settings.endlessHighscore).width / 2;
-            float height = Assets.font.getBounds("Highscore" + Settings.endlessHighscore).height;
             Assets.font.draw(spriteBatch, "Highscore: " + Settings.endlessHighscore, SCREEN_WIDTH * 10 / 2 - width, SCREEN_HEIGHT);
         }
 
         if(GAME_MODE == REGULAR_MODE) {
-            float width = Assets.font.getBounds(String.valueOf(codesBroken)).width/2;
-            float height = Assets.font.getBounds("" + codesBroken).height;
-            Assets.font.draw(spriteBatch, String.valueOf(codesBroken), SCREEN_WIDTH * 10 / 2 - width, 8 * 10 + height);
+            float width = Assets.font.getBounds("Solved: " + String.valueOf(codesBroken)).width/2;
+            float height = Assets.font.getBounds("Solved: " + codesBroken).height;
+            Assets.font.draw(spriteBatch, "Solved: " + String.valueOf(codesBroken), SCREEN_WIDTH * 10 / 2 - width, 8 * 10 + height);
         } else {
-            float width = Assets.font.getBounds(String.valueOf(score)).width/2;
-            float height = Assets.font.getBounds("" + score).height;
-            Assets.font.draw(spriteBatch, String.valueOf(score), SCREEN_WIDTH * 10 / 2 - width, 8 * 10 + height);
+            float width = Assets.font.getBounds("Score: " + String.valueOf(score)).width/2;
+            float height = Assets.font.getBounds("Score: " + score).height;
+            Assets.font.draw(spriteBatch, "Score: " + String.valueOf(score), SCREEN_WIDTH * 10 / 2 - width, 8 * 10 + height);
         }
+        gpgs.showAd();
     }
 
     private void resetGame() {

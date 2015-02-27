@@ -91,7 +91,7 @@ public class Tile extends Sprite {
 
     public void fillScreen(){
         active = false;
-        colorChanger = new ColorEffects(Colors.GREEN, Colors.WHITE, 0.9f);
+        colorChanger = new ColorEffects(Colors.ACTIVE_CIRCLE, Colors.WHITE, 0.9f);
         colorChanger.start();
         fillAnimator.start(false);
         float previousCenterX = getX() + getWidth()/2;

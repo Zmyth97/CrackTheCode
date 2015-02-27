@@ -32,7 +32,7 @@ public class Assets {
         soundButtonOnTexture = new Texture(Gdx.files.internal("menu/soundButtonOn.png"));
         menuTitleTexture = new Texture(Gdx.files.internal("menu/menuTitle.png"));
         font = new BitmapFont(Gdx.files.internal("font/cartoon.fnt"), Gdx.files.internal("font/cartoon.png"), false);
-        font.setScale(0.25f);
+        font.setScale(0.15f);
         font.setColor(Color.BLACK);
     }
 
@@ -46,6 +46,17 @@ public class Assets {
     }
 
     public static void dispose(){
-        //TODO Add Disposals!!!!!! (CMON BOY!)
+        endlessButtonTexture.dispose();
+        playButtonTexture.dispose();
+        scoreButtonTexture.dispose();
+        soundButtonOnTexture.dispose();
+        soundButtonOffTexture.dispose();
+        menuTitleTexture.dispose();
+
+        buttonTexture.dispose();
+        shadowTexture.dispose();
+
+        buttonSound.dispose();
+        font.dispose();
     }
 }
