@@ -19,7 +19,7 @@ public class Tile extends Sprite {
     private boolean fillingScreen;
 
     private static float SIZE = 3;
-    private static float FILL_SIZE = 30;
+    private static float FILL_SIZE = 31;
 
     private ColorEffects colorChanger;
     private ScaleAnimator appearAnimator;
@@ -31,7 +31,7 @@ public class Tile extends Sprite {
         super(texture, 0, 0, texture.getWidth(), texture.getHeight());
 
         this.animationDelay = 0;
-        this.setColor(Colors.GAME_CIRCLE);
+        this.setColor(Colors.DISABLED_CIRCLE);
         this.setSize(SIZE, SIZE);
         this.setPosition(locationX, locationY);
         this.scaleAmount = 1;
@@ -49,7 +49,7 @@ public class Tile extends Sprite {
         super(texture, 0, 0, texture.getWidth(), texture.getHeight());
 
         this.animationDelay = animationDelay;
-        this.setColor(Colors.GAME_CIRCLE);
+        this.setColor(Colors.DISABLED_CIRCLE);
         this.setSize(SIZE, SIZE);
         this.setPosition(locationX, locationY);
         this.scaleAmount = 1;
@@ -65,6 +65,7 @@ public class Tile extends Sprite {
 
     public void appear(){
         appearAnimator.start(true);
+        if (!active && getScaleX() < 0.5f && getWidth() == SIZE) setColor(Colors.GAME_CIRCLE);
     }
 
     public boolean isActive() {
@@ -92,6 +93,20 @@ public class Tile extends Sprite {
     public void fillScreen(){
         active = false;
         colorChanger = new ColorEffects(Colors.ACTIVE_CIRCLE, Colors.WHITE, 0.9f);
+        colorChanger.start();
+        fillAnimator.start(false);
+        float previousCenterX = getX() + getWidth()/2;
+        float previousCenterY = getY() + getHeight()/2;
+        setSize(FILL_SIZE, FILL_SIZE);
+        setX(previousCenterX-FILL_SIZE/2);
+        setY(previousCenterY-FILL_SIZE/2);
+        setOriginCenter();
+        fillingScreen = true;
+    }
+
+    public void fillScreenGameOver(){
+        active = false;
+        colorChanger = new ColorEffects(getColor(), Colors.ACTIVE_CIRCLE, 0.9f);
         colorChanger.start();
         fillAnimator.start(false);
         float previousCenterX = getX() + getWidth()/2;

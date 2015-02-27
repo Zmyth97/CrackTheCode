@@ -60,7 +60,6 @@ public class GameWorld {
             tiles.add(new Tile(locX, locY, 1, Assets.buttonTexture));
         }
         Collections.shuffle(tiles);
-        newActiveTile();
         if (tileToAdd != null) tiles.add(tileToAdd);
     }
 
@@ -72,11 +71,15 @@ public class GameWorld {
                 Tile t = iter.next();
                 if (t.isFillingScreen() && t.isDoneFillingScreen()){
                     iter.remove();
+                    newActiveTile();
                 }
                 t.update(delta);
                 t.appear();
             }
         } else if (state == MainScreen.GAME_OVER) {
+            for (Tile t: tiles){
+                t.update(delta);
+            }
             for (MenuButton mb : gameOverButtons) {
                 mb.update(delta);
             }
@@ -107,9 +110,34 @@ public class GameWorld {
     }
 
     public void reset() {
-        gameOverButtons.add(new MenuButton(MainScreen.SCORE, 1, 1, Assets.buttonTexture));
-        gameOverButtons.add(new MenuButton(MainScreen.PLAY, 4, 1, Assets.buttonTexture));
-        gameOverButtons.add(new MenuButton(MainScreen.SOUND, 7, 1, Assets.buttonTexture));
+        tiles = new ArrayList<Tile>();
+        for (int tilesToDraw = 0; tilesToDraw < tileCount; tilesToDraw++) {
+            float locY = (tilesToDraw / 3) * 3.33f + 0.33f;
+            float locX = (tilesToDraw % 3) * 3.33f + 0.33f;
+            tiles.add(new Tile(locX, locY, Assets.buttonTexture));
+        }
+
+        gameOverButtons = new ArrayList<MenuButton>();
+        gameOverButtons.add(new MenuButton(MainScreen.PLAY, 1, 6, Assets.buttonTexture));
+        gameOverButtons.add(new MenuButton(MainScreen.SCORE, 1, 4, Assets.buttonTexture));
+        gameOverButtons.add(new MenuButton(MainScreen.SHARE, 1, 2, Assets.buttonTexture));
+
+        Collections.shuffle(tiles);
+        newActiveTile();
+    }
+
+    public void putActiveLast(){
+        Tile putToLast = null;
+        Iterator<Tile> iter = tiles.iterator();
+        while(iter.hasNext()){
+            Tile t = iter.next();
+            if (t.isActive()){
+                t.fillScreenGameOver();
+                putToLast = t;
+                iter.remove();
+            }
+        }
+        if (putToLast != null) tiles.add(putToLast);
     }
 
 }

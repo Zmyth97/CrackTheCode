@@ -1,6 +1,7 @@
 package com.desitum.crackTheCode.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -73,6 +74,7 @@ public class MainScreen implements Screen {
 
 
     public MainScreen(GooglePlayServicesInterface gps) {
+        Gdx.input.setCatchBackKey(true);
         score = 0;
         codesBroken = 0;
         tileCounter = 0;
@@ -113,6 +115,13 @@ public class MainScreen implements Screen {
             onClick();
         }
 
+        if (Gdx.input.isKeyPressed(Input.Keys.BACK)){
+            if (state != GAME_RUNNING){
+                reset();
+                state = MENU_WAITING;
+            }
+        }
+
         update(delta);
 
         cam.update();
@@ -124,6 +133,7 @@ public class MainScreen implements Screen {
         spriteBatch.end();
     }
 
+    //region onClick
     private void onClick() {
         switch (state) {
             case MENU_WAITING:
@@ -183,6 +193,7 @@ public class MainScreen implements Screen {
     }
 
     private void onClickGameRunning() {
+        boolean needToEndGame = false;
         for (Tile t : gameWorld.getTiles()) {
             if (CollisionDetection.pointInRectangle(t.getBoundingRectangle(), touchPoint)) {
                 if (t.isActive()) {
@@ -193,7 +204,7 @@ public class MainScreen implements Screen {
                     gameWorld.newActiveTile();
                 }
                 else{
-                    state = GAME_OVER;
+                    needToEndGame = true;
                 }
                 if (tileCounter == 12 && GAME_MODE == REGULAR_MODE) {
                     t.fillScreen();
@@ -205,12 +216,17 @@ public class MainScreen implements Screen {
                 }
             }
         }
+        if (needToEndGame){
+            endGame();
+        }
     }
 
     private void onClickGameOver() {
         //TODO Add in end game interface
     }
+    //endregion
 
+    //region update
     private void update(float delta) {
         switch (state) {
             case MENU_BEFORE_TRANSITION:
@@ -260,45 +276,7 @@ public class MainScreen implements Screen {
         gameWorld.update(state, gameRenderer.getCam(), delta);
         gameTimer -= delta;
         if(gameTimer <= 0){
-            state = GAME_OVER;
-            if(GAME_MODE == REGULAR_MODE) {
-                Settings.saveRegularScore(codesBroken);
-                gpgs.submitScore(Settings.regularHighscore);
-                if(Settings.regularHighscore >= 1){
-                    gpgs.unlockAchievement(CrackTheCode.FIRST_CODE);
-                }
-                if(Settings.regularHighscore >= 10){
-                    gpgs.unlockAchievement(CrackTheCode.CODE_NOVICE);
-                }
-                if(Settings.regularHighscore >= 25){
-                    gpgs.unlockAchievement(CrackTheCode.CODE_EXPERT);
-                }
-                if(Settings.regularHighscore >= 50){
-                    gpgs.unlockAchievement(CrackTheCode.CODE_MASTER);
-                }
-                if(Settings.regularHighscore >= 100){
-                    gpgs.unlockAchievement(CrackTheCode.CODE_LEGEND);
-                }
-
-            }else {
-                Settings.saveEndlessScore(score);
-                gpgs.submitScore(Settings.endlessHighscore);
-                if(Settings.endlessHighscore >= 20){
-                    gpgs.unlockAchievement(CrackTheCode.ENDLESS_BEGINNER);
-                }
-                if(Settings.endlessHighscore >= 100){
-                    gpgs.unlockAchievement(CrackTheCode.ENDLESS_NOVICE);
-                }
-                if(Settings.endlessHighscore >= 250){
-                    gpgs.unlockAchievement(CrackTheCode.ENDLESS_EXPERT);
-                }
-                if(Settings.endlessHighscore >= 500){
-                    gpgs.unlockAchievement(CrackTheCode.ENDLESS_MASTER);
-                }
-                if(Settings.endlessHighscore >= 1000){
-                    gpgs.unlockAchievement(CrackTheCode.ENDLESS_LEGEND);
-                }
-            }
+            endGame();
         }
     }
 
@@ -313,7 +291,9 @@ public class MainScreen implements Screen {
     private void updateGameOverTransition(float delta) {
 
     }
+    //endregion
 
+    //region draw
     private void draw() {
         switch (state) {
             case MENU_BEFORE_TRANSITION:
@@ -409,12 +389,49 @@ public class MainScreen implements Screen {
         }
         gpgs.showAd();
     }
+    //endregion
 
-    private void resetGame() {
-        cam.position.set(SCREEN_WIDTH * 10 / 2, SCREEN_HEIGHT * 10 / 2, 0);
-        gameWorld.reset();
-        gameRenderer.resetCam();
-        menuRenderer.resetCam();
+    public void endGame(){
+        gameWorld.putActiveLast();
+        state = GAME_OVER;
+        if(GAME_MODE == REGULAR_MODE) {
+            Settings.saveRegularScore(codesBroken);
+            gpgs.submitScore(Settings.regularHighscore);
+            if(Settings.regularHighscore >= 1){
+                gpgs.unlockAchievement(CrackTheCode.FIRST_CODE);
+            }
+            if(Settings.regularHighscore >= 10){
+                gpgs.unlockAchievement(CrackTheCode.CODE_NOVICE);
+            }
+            if(Settings.regularHighscore >= 25){
+                gpgs.unlockAchievement(CrackTheCode.CODE_EXPERT);
+            }
+            if(Settings.regularHighscore >= 50){
+                gpgs.unlockAchievement(CrackTheCode.CODE_MASTER);
+            }
+            if(Settings.regularHighscore >= 100){
+                gpgs.unlockAchievement(CrackTheCode.CODE_LEGEND);
+            }
+
+        }else {
+            Settings.saveEndlessScore(score);
+            gpgs.submitScore(Settings.endlessHighscore);
+            if(Settings.endlessHighscore >= 20){
+                gpgs.unlockAchievement(CrackTheCode.ENDLESS_BEGINNER);
+            }
+            if(Settings.endlessHighscore >= 100){
+                gpgs.unlockAchievement(CrackTheCode.ENDLESS_NOVICE);
+            }
+            if(Settings.endlessHighscore >= 250){
+                gpgs.unlockAchievement(CrackTheCode.ENDLESS_EXPERT);
+            }
+            if(Settings.endlessHighscore >= 500){
+                gpgs.unlockAchievement(CrackTheCode.ENDLESS_MASTER);
+            }
+            if(Settings.endlessHighscore >= 1000){
+                gpgs.unlockAchievement(CrackTheCode.ENDLESS_LEGEND);
+            }
+        }
     }
 
     @Override
@@ -424,6 +441,13 @@ public class MainScreen implements Screen {
         viewport.update(width, height, true);
     }
 
+    public void reset(){
+        score = 0;
+        codesBroken = 0;
+        tileCounter = 0;
+        gameTimer = 8;
+        gameWorld.reset();
+    }
 
     @Override
     public void show() {
