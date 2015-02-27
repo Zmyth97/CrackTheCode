@@ -76,7 +76,7 @@ public class MainScreen implements Screen {
         score = 0;
         codesBroken = 0;
         tileCounter = 0;
-        gameTimer = 8;
+        gameTimer = 7;
 
         gpgs = gps;
         cam = new OrthographicCamera(SCREEN_WIDTH * 10, SCREEN_HEIGHT * 10);
@@ -199,7 +199,7 @@ public class MainScreen implements Screen {
                     t.fillScreen();
                     tileCounter = 0;
                     codesBroken+=1;
-                    gameTimer = 9;
+                    gameTimer = 7;
                     gameWorld.newScreen();
                     gpgs.hideAd();
                 }
@@ -368,11 +368,12 @@ public class MainScreen implements Screen {
         gameRenderer.render();
         spriteBatch.setProjectionMatrix(cam.combined);
 
-        float wide = Assets.font.getBounds("" + String.valueOf(((int) gameTimer))).width/2;
+        spriteBatch.draw(Assets.timerTexture, 0, SCREEN_HEIGHT * 10 -10, 10, 10);
+        float wide = Assets.font.getBounds("" + String.valueOf(((int) gameTimer + 1))).width/2;
         if(gameTimer <= 4){
             Assets.font.setColor(Colors.ACTIVE_CIRCLE);
         }
-        Assets.font.draw(spriteBatch, "" + String.valueOf(((int) gameTimer)), SCREEN_WIDTH * 10 /6 - wide, SCREEN_HEIGHT*10);
+        Assets.font.draw(spriteBatch, "" + String.valueOf(((int) gameTimer + 1)), SCREEN_WIDTH * 10 /6 - wide, SCREEN_HEIGHT*10);
 
 
         if(GAME_MODE == REGULAR_MODE) {
