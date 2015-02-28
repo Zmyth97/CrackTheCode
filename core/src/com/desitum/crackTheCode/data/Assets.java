@@ -48,8 +48,8 @@ public class Assets {
 
     public static void loadSounds(){
         buttonSound = Gdx.audio.newSound(Gdx.files.internal("sound/Click.mp3"));
-        endGame = Gdx.audio.newSound(Gdx.files.internal("sound/endGame.mp3"));
-        shatter = Gdx.audio.newSound(Gdx.files.internal("sound/Shatter.mp3"));
+        endGame = Gdx.audio.newSound(Gdx.files.internal("sound/endSound.wav"));
+        shatter = Gdx.audio.newSound(Gdx.files.internal("sound/Shatter.wav"));
     }
 
     public static void dispose(){
