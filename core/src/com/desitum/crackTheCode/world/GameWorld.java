@@ -34,9 +34,13 @@ public class GameWorld {
         }
 
         gameOverButtons = new ArrayList<MenuButton>();
-        gameOverButtons.add(new MenuButton(MainScreen.PLAY, 1, 6, Assets.buttonTexture));
-        gameOverButtons.add(new MenuButton(MainScreen.SCORE, 1, 4, Assets.buttonTexture));
-        gameOverButtons.add(new MenuButton(MainScreen.SHARE, 1, 2, Assets.buttonTexture));
+        gameOverButtons.add(new MenuButton(MainScreen.PLAY, 0.9f, 1, 5.5f, Assets.playButtonTexture));
+        gameOverButtons.add(new MenuButton(MainScreen.SCORE, 0.9f, 5.5f, 5.5f, Assets.shareButtonTexture));
+        gameOverButtons.add(new MenuButton(MainScreen.SHARE, 0.9f, 3.25f, 1, Assets.scoreButtonTexture));
+
+        for (MenuButton mb: gameOverButtons){
+            mb.setScale(0);
+        }
 
         Collections.shuffle(tiles);
         newActiveTile();
@@ -118,9 +122,13 @@ public class GameWorld {
         }
 
         gameOverButtons = new ArrayList<MenuButton>();
-        gameOverButtons.add(new MenuButton(MainScreen.PLAY, 1, 6, Assets.buttonTexture));
-        gameOverButtons.add(new MenuButton(MainScreen.SCORE, 1, 4, Assets.buttonTexture));
-        gameOverButtons.add(new MenuButton(MainScreen.SHARE, 1, 2, Assets.buttonTexture));
+        gameOverButtons.add(new MenuButton(MainScreen.PLAY, 0.9f, 1, 5.5f, Assets.playButtonTexture));
+        gameOverButtons.add(new MenuButton(MainScreen.SCORE, 0.9f, 5.5f, 5.5f, Assets.shareButtonTexture));
+        gameOverButtons.add(new MenuButton(MainScreen.SHARE, 0.9f, 3.25f, 1, Assets.scoreButtonTexture));
+
+        for (MenuButton mb: gameOverButtons){
+            mb.setScale(0);
+        }
 
         Collections.shuffle(tiles);
         newActiveTile();
@@ -140,4 +148,9 @@ public class GameWorld {
         if (putToLast != null) tiles.add(putToLast);
     }
 
+    public void endGame(){
+        for (MenuButton mb: gameOverButtons){
+            mb.appear();
+        }
+    }
 }

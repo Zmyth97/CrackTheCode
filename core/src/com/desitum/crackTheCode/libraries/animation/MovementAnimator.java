@@ -7,6 +7,7 @@ import com.desitum.crackTheCode.libraries.interpolation.BounceInterpolator;
 import com.desitum.crackTheCode.libraries.interpolation.DecelerateInterpolator;
 import com.desitum.crackTheCode.libraries.interpolation.Interpolation;
 import com.desitum.crackTheCode.libraries.interpolation.Interpolator;
+import com.desitum.crackTheCode.libraries.interpolation.LinearInterpolator;
 import com.desitum.crackTheCode.libraries.interpolation.OvershootInterpolator;
 
 /**
@@ -92,6 +93,15 @@ public class MovementAnimator {
             this.interpolator = AccelerateDecelerateInterpolator.$();
         } else if (interpolator == Interpolation.BOUNCE_INTERPOLATOR){
             this.interpolator = BounceInterpolator.$();
+        } else if (interpolator == Interpolation.LINEAR_INTERPOLATOR){
+            this.interpolator = LinearInterpolator.$();
         }
+    }
+
+    public void reset(){
+        ran = false;
+        running = false;
+        currentPosition = startPos;
+        timeInAnimation = 0;
     }
 }

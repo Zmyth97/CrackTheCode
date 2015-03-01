@@ -16,6 +16,7 @@ public class Assets {
     public static Texture scoreButtonTexture;
     public static Texture soundButtonOnTexture;
     public static Texture soundButtonOffTexture;
+    public static Texture shareButtonTexture;
     public static Texture menuTitleTexture;
 
     public static Texture buttonTexture;
@@ -34,6 +35,7 @@ public class Assets {
         scoreButtonTexture = new Texture(Gdx.files.internal("menu/scoreButton.png"));
         soundButtonOffTexture = new Texture(Gdx.files.internal("menu/volumeOffButton.png"));
         soundButtonOnTexture = new Texture(Gdx.files.internal("menu/volumeOnButton.png"));
+        shareButtonTexture = new Texture(Gdx.files.internal("menu/shareButton.png"));
         menuTitleTexture = new Texture(Gdx.files.internal("menu/menuTitle.png"));
         font = new BitmapFont(Gdx.files.internal("font/cartoon.fnt"), Gdx.files.internal("font/cartoon.png"), false);
         font.setScale(0.15f);

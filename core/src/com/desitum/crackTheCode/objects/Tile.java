@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.desitum.crackTheCode.libraries.ColorEffects;
 import com.desitum.crackTheCode.libraries.Colors;
+import com.desitum.crackTheCode.libraries.animation.MovementAnimator;
 import com.desitum.crackTheCode.libraries.animation.ScaleAnimator;
 import com.desitum.crackTheCode.libraries.interpolation.Interpolation;
 import com.desitum.crackTheCode.screens.MainScreen;
@@ -22,6 +23,7 @@ public class Tile extends Sprite {
     private static float FILL_SIZE = 31;
 
     private ColorEffects colorChanger;
+    private MovementAnimator clickAnimator;
     private ScaleAnimator appearAnimator;
     private ScaleAnimator fillAnimator;
 
@@ -43,6 +45,7 @@ public class Tile extends Sprite {
 
         fillAnimator = new ScaleAnimator(1f, SIZE/FILL_SIZE, 1, Interpolation.ACCELERATE_INTERPOLATOR);
         appearAnimator = new ScaleAnimator(0.8f, 0, 1, Interpolation.OVERSHOOT_INTERPOLATOR);
+        clickAnimator = new MovementAnimator(getY() - 0.1f, getY(), 0.1f, Interpolation.LINEAR_INTERPOLATOR);
     }
 
     public Tile(float locationX, float locationY, float animationDelay, Texture texture) {
@@ -61,6 +64,7 @@ public class Tile extends Sprite {
 
         fillAnimator = new ScaleAnimator(1f, SIZE/FILL_SIZE , 1, Interpolation.ACCELERATE_INTERPOLATOR);
         appearAnimator = new ScaleAnimator(0.8f, 0, 1, Interpolation.OVERSHOOT_INTERPOLATOR);
+        clickAnimator = new MovementAnimator(getY() - 0.1f, getY(), 0.1f, Interpolation.LINEAR_INTERPOLATOR);
     }
 
     public void appear(){
@@ -81,6 +85,7 @@ public class Tile extends Sprite {
         active = false;
         disabled = true;
 
+
         if (MainScreen.GAME_MODE == MainScreen.REGULAR_MODE) {
             colorChanger = new ColorEffects(Colors.ACTIVE_CIRCLE, Colors.DISABLED_CIRCLE, 0.5f);
             colorChanger.start();
@@ -88,6 +93,7 @@ public class Tile extends Sprite {
             colorChanger = new ColorEffects(Colors.ACTIVE_CIRCLE, Colors.GAME_CIRCLE, 0.5f);
             colorChanger.start();
         }
+        clickAnimator.start(false);
     }
 
     public void fillScreen(){
@@ -98,8 +104,8 @@ public class Tile extends Sprite {
         float previousCenterX = getX() + getWidth()/2;
         float previousCenterY = getY() + getHeight()/2;
         setSize(FILL_SIZE, FILL_SIZE);
-        setX(previousCenterX-FILL_SIZE/2);
-        setY(previousCenterY-FILL_SIZE/2);
+        setX(previousCenterX - FILL_SIZE / 2);
+        setY(previousCenterY - FILL_SIZE / 2);
         setOriginCenter();
         fillingScreen = true;
     }
@@ -147,6 +153,13 @@ public class Tile extends Sprite {
             colorChanger.update(delta);
             setColor(colorChanger.getCurrentColor());
             System.out.println(colorChanger.getCurrentColor());
+        }
+        if (clickAnimator.isRunning() && !fillAnimator.isRunning()){
+            clickAnimator.update(delta);
+            setY(clickAnimator.getCurrentPos());
+            if (clickAnimator.didFinish()){
+                clickAnimator.reset();
+            }
         }
         if (fillAnimator.isRunning()){
             fillAnimator.update(delta);

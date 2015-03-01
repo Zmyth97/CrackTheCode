@@ -409,6 +409,7 @@ public class MainScreen implements Screen {
 
     public void endGame(){
         gameWorld.putActiveLast();
+        gameWorld.endGame();
         Assets.endGame.play(Settings.volume);
         state = GAME_OVER;
         if(GAME_MODE == REGULAR_MODE) {

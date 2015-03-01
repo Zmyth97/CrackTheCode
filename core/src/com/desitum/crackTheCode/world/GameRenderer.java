@@ -2,8 +2,8 @@ package com.desitum.crackTheCode.world;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.maps.tiled.renderers.OrthoCachedTiledMapRenderer;
 import com.desitum.crackTheCode.data.Assets;
+import com.desitum.crackTheCode.objects.MenuButton;
 import com.desitum.crackTheCode.objects.Tile;
 import com.desitum.crackTheCode.screens.MainScreen;
 
@@ -32,6 +32,10 @@ public class GameRenderer {
         for (Tile t : world.tiles) {
             gameBatch.draw(Assets.shadowTexture, t.getX() + 0.2f, t.getY() -0.4f, t.getWidth() * t.getScaleX(), t.getHeight() * t.getScaleY());
             t.draw(gameBatch);
+        }
+        for (MenuButton mb: world.gameOverButtons){
+            gameBatch.draw(Assets.shadowTexture, mb.getX() + 0.2f, mb.getY() -0.4f, mb.getWidth() * mb.getScaleX(), mb.getHeight() * mb.getScaleY());
+            mb.draw(gameBatch);
         }
     }
 
