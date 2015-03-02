@@ -1,6 +1,7 @@
 package com.desitum.crackTheCode.world;
 
 import com.desitum.crackTheCode.data.Assets;
+import com.desitum.crackTheCode.data.Settings;
 import com.desitum.crackTheCode.objects.MenuButton;
 import com.desitum.crackTheCode.screens.MainScreen;
 
@@ -53,6 +54,12 @@ public class MenuWorld {
         menuButtons.add(soundButton);
         menuButtons.add(scoreRegularButton);
         menuButtons.add(scoreEndlessButton);
+
+        if (!Settings.volumeOn){
+            soundButton.setTexture(Assets.soundButtonOffTexture);
+        } else {
+            soundButton.setTexture(Assets.soundButtonOnTexture);
+        }
 
         playButton.appear();
     }
