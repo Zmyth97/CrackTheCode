@@ -81,7 +81,7 @@ public class MainScreen implements Screen {
         score = 0;
         codesBroken = 0;
         tileCounter = 0;
-        gameTimer = 7;
+        gameTimer = 6;
         timerRunning = false;
 
         gpgs = gps;
@@ -224,7 +224,7 @@ public class MainScreen implements Screen {
                     gameWorld.newScreen();
                 }
                 else if(tileCounter == 12 && GAME_MODE == ENDLESS_MODE){
-                    gameTimer = 7;
+                    gameTimer = 6;
                     tileCounter = 0;
                 }
             }
