@@ -32,7 +32,7 @@ public class MenuRenderer {
             menuItem.draw(menuBatch);
         }
 
-        menuBatch.draw(Assets.menuTitleTexture, 0, 11, 10, 4);
+        menuBatch.draw(Assets.menuTitleTexture, 0, 11, 10, 3);
     }
 
     public void resetCam() {
