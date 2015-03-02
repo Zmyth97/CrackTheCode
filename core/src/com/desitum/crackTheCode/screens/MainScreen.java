@@ -183,6 +183,10 @@ public class MainScreen implements Screen {
                     } else {
                         mb.setTexture(Assets.soundButtonOffTexture); //No sound off texture yet!
                     }
+                } else if (mb.getCommand().equals(SCORE_REG)){
+                    gpgs.getRegularLeaderboard();
+                } else if (mb.getCommand().equals(SCORE_END)){
+                    gpgs.getEndlessLeaderboard();
                 }
             }
         }
