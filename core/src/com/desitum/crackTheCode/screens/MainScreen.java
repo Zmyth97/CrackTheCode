@@ -238,8 +238,8 @@ public class MainScreen implements Screen {
         for (MenuButton mb: gameWorld.getGameOverButtons()){
             if (CollisionDetection.pointInRectangle(mb.getBoundingRectangle(), touchPoint)){
                 if (mb.getCommand().equals(PLAY)){
-                    gameWorld.reset();
-                    state = GAME_BEFORE;
+                    reset();
+                    state = GAME_RUNNING;
                 } else if (mb.getCommand().equals(SCORE)){
                     if (GAME_MODE == REGULAR_MODE){
                         gpgs.getRegularLeaderboard();
@@ -490,7 +490,7 @@ public class MainScreen implements Screen {
         score = 0;
         codesBroken = 0;
         tileCounter = 0;
-        gameTimer = 8;
+        gameTimer = 6;
         menuWorld.reset();
         gameWorld.reset();
     }
