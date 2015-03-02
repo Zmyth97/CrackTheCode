@@ -35,8 +35,8 @@ public class GameWorld {
 
         gameOverButtons = new ArrayList<MenuButton>();
         gameOverButtons.add(new MenuButton(MainScreen.PLAY, 0.9f, 1, 5.5f, Assets.playButtonTexture));
-        gameOverButtons.add(new MenuButton(MainScreen.SCORE, 0.9f, 5.5f, 5.5f, Assets.shareButtonTexture));
-        gameOverButtons.add(new MenuButton(MainScreen.SHARE, 0.9f, 3.25f, 1, Assets.scoreButtonTexture));
+        gameOverButtons.add(new MenuButton(MainScreen.SCORE, 1f, 5.5f, 5.5f, Assets.shareButtonTexture));
+        gameOverButtons.add(new MenuButton(MainScreen.SHARE, 1.1f, 3.25f, 1, Assets.scoreButtonTexture));
 
         for (MenuButton mb: gameOverButtons){
             mb.setScale(0);
@@ -123,8 +123,8 @@ public class GameWorld {
 
         gameOverButtons = new ArrayList<MenuButton>();
         gameOverButtons.add(new MenuButton(MainScreen.PLAY, 0.9f, 1, 5.5f, Assets.playButtonTexture));
-        gameOverButtons.add(new MenuButton(MainScreen.SCORE, 0.9f, 5.5f, 5.5f, Assets.shareButtonTexture));
-        gameOverButtons.add(new MenuButton(MainScreen.SHARE, 0.9f, 3.25f, 1, Assets.scoreButtonTexture));
+        gameOverButtons.add(new MenuButton(MainScreen.SCORE, 1f, 5.5f, 5.5f, Assets.shareButtonTexture));
+        gameOverButtons.add(new MenuButton(MainScreen.SHARE, 1.1f, 3.25f, 1, Assets.scoreButtonTexture));
 
         for (MenuButton mb: gameOverButtons){
             mb.setScale(0);
@@ -148,9 +148,22 @@ public class GameWorld {
         if (putToLast != null) tiles.add(putToLast);
     }
 
+    public boolean gameOverButtonsHaveDisappeared(){
+        for (MenuButton mb: gameOverButtons){
+            if (!mb.hasDisappeared()){
+                return false;
+            }
+        }
+        return true;
+    }
+
     public void endGame(){
         for (MenuButton mb: gameOverButtons){
             mb.appear();
         }
+    }
+
+    public void removeEndGameScreen(){
+
     }
 }

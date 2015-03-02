@@ -70,4 +70,10 @@ public class MenuButton extends Sprite {
         this.command = command;
     }
 
+    public boolean hasDisappeared(){
+        if (disappearAnimator.didFinish()){
+            return true;
+        }
+        return false;
+    }
 }
