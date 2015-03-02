@@ -235,7 +235,26 @@ public class MainScreen implements Screen {
     }
 
     private void onClickGameOver() {
-        //TODO Add in end game interface
+        for (MenuButton mb: gameWorld.getGameOverButtons()){
+            if (CollisionDetection.pointInRectangle(mb.getBoundingRectangle(), touchPoint)){
+                if (mb.getCommand().equals(PLAY)){
+                    gameWorld.reset();
+                    state = GAME_BEFORE;
+                } else if (mb.getCommand().equals(SCORE)){
+                    if (GAME_MODE == REGULAR_MODE){
+                        gpgs.getRegularLeaderboard();
+                    } else {
+                        gpgs.getEndlessLeaderboard();
+                    }
+                } else if (mb.getCommand().equals(SHARE)){
+                    if (GAME_MODE == REGULAR_MODE){
+                        gpgs.shareRegularScore(Settings.regularHighscore);
+                    } else {
+                        gpgs.shareEndlessScore(Settings.endlessHighscore);
+                    }
+                }
+            }
+        }
     }
     //endregion
 
@@ -393,20 +412,22 @@ public class MainScreen implements Screen {
 
         if(GAME_MODE == REGULAR_MODE) {
             float width = Assets.font.getBounds("Highscore: " + Settings.regularHighscore).width / 2;
-            Assets.font.draw(spriteBatch, "Highscore: " + Settings.regularHighscore, SCREEN_WIDTH * 10 / 2 - width, SCREEN_HEIGHT);
+            float height = Assets.font.getBounds("Highscore: " + Settings.regularHighscore).height;
+            Assets.font.draw(spriteBatch, "Highscore: " + Settings.regularHighscore, SCREEN_WIDTH * 10 / 2 - width, 10 * 10 + height);
         } else {
             float width = Assets.font.getBounds("Highscore: " + Settings.endlessHighscore).width / 2;
-            Assets.font.draw(spriteBatch, "Highscore: " + Settings.endlessHighscore, SCREEN_WIDTH * 10 / 2 - width, SCREEN_HEIGHT);
+            float height = Assets.font.getBounds("Highscore: " + Settings.endlessHighscore).height;
+            Assets.font.draw(spriteBatch, "Highscore: " + Settings.endlessHighscore, SCREEN_WIDTH * 10 / 2 - width, 10f * 10 + height);
         }
 
         if(GAME_MODE == REGULAR_MODE) {
             float width = Assets.font.getBounds("Solved: " + String.valueOf(codesBroken)).width/2;
             float height = Assets.font.getBounds("Solved: " + codesBroken).height;
-            Assets.font.draw(spriteBatch, "Solved: " + String.valueOf(codesBroken), SCREEN_WIDTH * 10 / 2 - width, 8 * 10 + height);
+            Assets.font.draw(spriteBatch, "Solved: " + String.valueOf(codesBroken), SCREEN_WIDTH * 10 / 2 - width, 12f * 10 + height);
         } else {
             float width = Assets.font.getBounds("Score: " + String.valueOf(score)).width/2;
             float height = Assets.font.getBounds("Score: " + score).height;
-            Assets.font.draw(spriteBatch, "Score: " + String.valueOf(score), SCREEN_WIDTH * 10 / 2 - width, 8 * 10 + height);
+            Assets.font.draw(spriteBatch, "Score: " + String.valueOf(score), SCREEN_WIDTH * 10 / 2 - width, 12f * 10 + height);
         }
         gpgs.showAd();
     }
@@ -420,7 +441,7 @@ public class MainScreen implements Screen {
         state = GAME_OVER;
         if(GAME_MODE == REGULAR_MODE) {
             Settings.saveRegularScore(codesBroken);
-            gpgs.submitScore(Settings.regularHighscore);
+            gpgs.submitRegularScore(Settings.regularHighscore);
             if(Settings.regularHighscore >= 1){
                 gpgs.unlockAchievement(CrackTheCode.FIRST_CODE);
             }
@@ -439,7 +460,7 @@ public class MainScreen implements Screen {
 
         }else {
             Settings.saveEndlessScore(score);
-            gpgs.submitScore(Settings.endlessHighscore);
+            gpgs.submitEndlessScore(Settings.endlessHighscore);
             if(Settings.endlessHighscore >= 20){
                 gpgs.unlockAchievement(CrackTheCode.ENDLESS_BEGINNER);
             }

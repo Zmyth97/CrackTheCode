@@ -124,9 +124,30 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
     };
 
     @Override
-    public void getLeaderBoard() {
+    public void getRegularLeaderboard() {
         if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
-            startActivityForResult(Games.Leaderboards.getLeaderboardIntent(mGoogleApiClient, "CgkIocCXsPoEEAIQBg"), 100);
+            startActivityForResult(Games.Leaderboards.getLeaderboardIntent(mGoogleApiClient, "CgkIoOnTp_EOEAIQAA"), 100);
+        }
+        else{
+            mGoogleApiClient.connect();
+        }
+    }
+
+    @Override
+    public void getEndlessLeaderboard(){
+        //
+        if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
+            startActivityForResult(Games.Leaderboards.getLeaderboardIntent(mGoogleApiClient, "CgkIoOnTp_EOEAIQDA"), 100);
+        }
+        else{
+            mGoogleApiClient.connect();
+        }
+    }
+
+    @Override
+    public void submitRegularScore(int score) {
+        if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
+            Games.Leaderboards.submitScore(mGoogleApiClient, "CgkIoOnTp_EOEAIQAA", score);
         }
         else{
             //Nothing!
@@ -134,9 +155,9 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
     }
 
     @Override
-    public void submitScore(int score) {
+    public  void submitEndlessScore(int score){
         if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
-            Games.Leaderboards.submitScore(mGoogleApiClient, "CgkIocCXsPoEEAIQBg", score);
+            Games.Leaderboards.submitScore(mGoogleApiClient, "CgkIoOnTp_EOEAIQDA", score);
         }
         else{
             //Nothing!

@@ -5,8 +5,10 @@ package com.desitum.crackTheCode;
  */
 public interface GooglePlayServicesInterface {
 
-    public void getLeaderBoard();
-    public void submitScore(int score);
+    public void getRegularLeaderboard();
+    public void getEndlessLeaderboard();
+    public void submitRegularScore(int score);
+    public void submitEndlessScore(int score);
     public void showAd();
     public void hideAd();
     public void unlockAchievement(int achievement);
