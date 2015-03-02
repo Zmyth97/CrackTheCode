@@ -50,14 +50,15 @@ public class Assets {
 
     public static void loadSounds(){
         buttonSound = Gdx.audio.newSound(Gdx.files.internal("sound/Click.mp3"));
-        endGame = Gdx.audio.newSound(Gdx.files.internal("sound/endSound.wav"));
-        shatter = Gdx.audio.newSound(Gdx.files.internal("sound/Shatter.wav"));
+        endGame = Gdx.audio.newSound(Gdx.files.internal("sound/Crash.mp3"));
+        shatter = Gdx.audio.newSound(Gdx.files.internal("sound/ShatterFix.wav"));
     }
 
     public static void dispose(){
         endlessButtonTexture.dispose();
         playButtonTexture.dispose();
         scoreButtonTexture.dispose();
+        shareButtonTexture.dispose();
         soundButtonOnTexture.dispose();
         soundButtonOffTexture.dispose();
         menuTitleTexture.dispose();
@@ -67,6 +68,8 @@ public class Assets {
         timerTexture.dispose();
 
         buttonSound.dispose();
+        shatter.dispose();
+        endGame.dispose();
         font.dispose();
     }
 }

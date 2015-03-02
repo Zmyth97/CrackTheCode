@@ -36,6 +36,7 @@ public class MainScreen implements Screen {
     private float gameTimer;
     public int codesBroken;
     private int tileCounter;
+    public boolean timerRunning;
 
     private Viewport viewport;
 
@@ -81,6 +82,7 @@ public class MainScreen implements Screen {
         codesBroken = 0;
         tileCounter = 0;
         gameTimer = 7;
+        timerRunning = false;
 
         gpgs = gps;
         cam = new OrthographicCamera(SCREEN_WIDTH * 10, SCREEN_HEIGHT * 10);
@@ -197,6 +199,7 @@ public class MainScreen implements Screen {
 
     private void onClickGameRunning() {
         boolean needToEndGame = false;
+        timerRunning = true;
         for (Tile t : gameWorld.getTiles()) {
             if (CollisionDetection.pointInRectangle(t.getBoundingRectangle(), touchPoint)) {
                 if (t.isActive()) {
@@ -285,7 +288,9 @@ public class MainScreen implements Screen {
     private void updateGameRunning(float delta) {
         gameWorld.update(state, gameRenderer.getCam(), delta);
         gpgs.hideAd();
-        gameTimer -= delta;
+        if(timerRunning){
+            gameTimer -= delta;
+        }
         if(gameTimer <= 0){
             endGame();
         }
@@ -410,6 +415,7 @@ public class MainScreen implements Screen {
     public void endGame(){
         gameWorld.putActiveLast();
         gameWorld.endGame();
+        timerRunning = false;
         Assets.endGame.play(Settings.volume);
         state = GAME_OVER;
         if(GAME_MODE == REGULAR_MODE) {
